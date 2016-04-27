@@ -67,7 +67,9 @@ public class EffectsPart1HappyPath {
         print("\n[EXERCISE1]");
         Tuple2<Integer, Integer> t1 = Tuple.of(1, 2);
         Tuple2<Integer, Integer> t1final = t1.map1(i -> i + 10);
+//        Tuple2<Integer, Integer> t1final2 = t1.map(i -> i + 10,Function.identity());
         print("* Tuple 1 : "+t1final.equals(Tuple.of(11,2)));
+//        print("* Tuple 12 : "+t1final2.equals(Tuple.of(11,2)));
 
         Tuple3<Integer, Integer, Integer> t2 = Tuple.of(1, 2, 3);
         Tuple3<Integer, Integer, Integer> t2final = t2.map((x, y, z) -> Tuple.of(x + 10, y + 10, z + 10));

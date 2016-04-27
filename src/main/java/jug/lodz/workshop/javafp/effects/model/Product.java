@@ -10,10 +10,12 @@ public final class Product {
     public final String name;
     public final BigDecimal price;
     public final ProductCategory productCategory;
+    private final String description;
 
-    public Product(String name, BigDecimal price, ProductCategory productCategory) {
+    public Product(String name, BigDecimal price, ProductCategory productCategory, String description) {
         this.name = name;
         this.price = price;
         this.productCategory = productCategory;
+        this.description = description;
     }
 }
