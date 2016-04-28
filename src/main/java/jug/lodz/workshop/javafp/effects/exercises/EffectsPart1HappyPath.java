@@ -1,4 +1,4 @@
-package jug.lodz.workshop.javafp.effects.answers;
+package jug.lodz.workshop.javafp.effects.exercises;
 
 import javaslang.Tuple;
 import javaslang.Tuple2;
@@ -30,26 +30,28 @@ public class EffectsPart1HappyPath {
                         "by email : "+c.email+" or by phone "+c.phoneNumber+"</div>"
         );
 
-        //EXERCISE
+        //EXERCISE3 - decorate result of an inner function so it is always wrapped in div
+        //check Exercise 3 for test assertions
         static <A> Function<A,HTML> insideDiv(Function<A,HTML> toHtml){
-            return a -> html("<div>" +toHtml.apply(a).content +"</div>");
+            return null;
         }
 
         static Function<Customer,HTML> cystomerContactInfo = c -> html(
                 "Customer contact : "+c.name+" with email : "+c.email+""
         );
 
-        //EXERCISE
-        static Function<Customer,HTML> customerToHtml=insideDiv(cystomerContactInfo);
+        //EXERCISE3 - decorate customerContactInfo so it is wrapped in div block
+        static Function<Customer,HTML> customerToHtml=null;
 
         static Function<Product,String> productToString= p -> p.name +" : "+p.price+"$";
 
-        //EXERCISE
+        //EXERCISE3 - use productToString to build purchase line representation
+        // check Exercise 3 for assertions - "<div>tv : 300$ : 2</div>"
         static Function<PurchaseLine,HTML> purchaseLineToHtml= insideDiv(
-                p -> html(productToString.apply(p.product)+" : "+p.amount)
+                null
         );
 
-
+        //1)What if there is no consultant? What if there is a consultant but it doesn't have a phone?
         static Function<Purchase,HTML> displayPurchase = insideDiv(p->html(
           "purchase "+p.id+"<br/>\n" +
                   "made by : " + customerToHtml.apply(p.customer) + "<br/>\n"+
@@ -75,45 +77,29 @@ public class EffectsPart1HappyPath {
         static Function<String, BigDecimal> discountForACity = city -> city.equals("Lodz") ? new BigDecimal("0.2") : BigDecimal.ZERO;
 
 
-        //EXERCISE
-        static Function<Customer, BigDecimal> discountV1 = c -> {
-            BigDecimal customerDiscount = discountForCustomer.apply(c);
-            if(customerDiscount.compareTo(BigDecimal.ZERO) != 0) return customerDiscount;
-
-            BigDecimal cityDiscount = discountForACity.apply(c.city);
-            if (cityDiscount.compareTo(BigDecimal.ZERO) != 0) return cityDiscount;
-
-            return BigDecimal.ZERO;
-        };
+        //EXERCISE4
+        // if there is discount for given customer - then return it
+        //if there is not check if there is discount for city
+        //if there is none of them then return zero
+        static Function<Customer, BigDecimal> discountV1 = null;
 
 
-        //EXERCISE
-        static Function<BigDecimal,Function<Customer, BigDecimal>> discountV2 = defaultDiscount->c -> {
-            BigDecimal customerDiscount = discountForCustomer.apply(c);
-            if(customerDiscount.compareTo(BigDecimal.ZERO) != 0) return customerDiscount;
-
-            BigDecimal cityDiscount = discountForACity.apply(c.city);
-            if (cityDiscount.compareTo(BigDecimal.ZERO) != 0) return cityDiscount;
-
-            return defaultDiscount;
-        };
+        //EXERCISE4
+        //similar to previous but instead zero return default value
+        static Function<BigDecimal,Function<Customer, BigDecimal>> discountV2 = null;
 
         //EXERCISE
-        static Function<Supplier<BigDecimal>,Function<Customer, BigDecimal>> discountV3 = defaultDiscount-> c -> {
-            BigDecimal customerDiscount = discountForCustomer.apply(c);
-            if(customerDiscount.compareTo(BigDecimal.ZERO) != 0) return customerDiscount;
-
-            BigDecimal cityDiscount = discountForACity.apply(c.city);
-            if (cityDiscount.compareTo(BigDecimal.ZERO) != 0) return cityDiscount;
-
-            return defaultDiscount.get();
-        };
+        //similar to previous but use suuplier to provide default value
+        //this may be handy if calculation of default value is time consuming
+        static Function<Supplier<BigDecimal>,Function<Customer, BigDecimal>> discountV3 = null;
 
         //EXERCISE
-        static Function<Purchase,BigDecimal> calculatePrice= p->
-                p.getLines().stream().map(line->line.product.price).reduce(BigDecimal.ZERO, BigDecimal::add);
+        //add prices from all products in purchase
+        static Function<Purchase,BigDecimal> calculatePrice= null;
 
-
+        //1)what if I want to postpone decision about discount? Currently it is hardcoded or provided
+        //at the very begining
+        //2) How do I know if given value was a default value?
         static Function<Purchase,Tuple3<BigDecimal,BigDecimal,BigDecimal>> charge = p-> Tuple
                 .of(calculatePrice.apply(p),discountV1.apply(p.customer))
                 .map((price,discount)->Tuple.of(price,price.multiply(discount)))
@@ -126,30 +112,28 @@ public class EffectsPart1HappyPath {
     void exerciseLevel1(){
         print("\n[EXERCISE1]");
         Tuple2<Integer, Integer> t1 = Tuple.of(1, 2);
-        Tuple2<Integer, Integer> t1final = t1.map1(i -> i + 10);
-//        Tuple2<Integer, Integer> t1final2 = t1.map(i -> i + 10,Function.identity());
+        Tuple2<Integer, Integer> t1final = t1.map1(null);
         print("* Tuple 1 : "+t1final.equals(Tuple.of(11,2)));
-//        print("* Tuple 12 : "+t1final2.equals(Tuple.of(11,2)));
 
         Tuple3<Integer, Integer, Integer> t2 = Tuple.of(1, 2, 3);
-        Tuple3<Integer, Integer, Integer> t2final = t2.map((x, y, z) -> Tuple.of(x + 10, y + 10, z + 10));
+        Tuple3<Integer, Integer, Integer> t2final = t2.map(null);
         print("* Tuple 2 : "+t2final.equals(Tuple.of(11,12,13)));
 
 
         Tuple2<Integer, Integer> t3 = Tuple.of(3, 5);
-        Integer t3result = t3.transform((x, y) -> x + y);
+        Integer t3result = t3.transform(null);
         print("* Tuple 3 : "+(t3result == 8));
     }
 
     void exerciseLevel2(){
         print("\n[EXERCISE2]");
 
-        Integer sum = Arrays.asList(1, 2, 3, 4, 5).stream().reduce(0, Integer::sum);
+        Integer sum = Arrays.asList(1, 2, 3, 4, 5).stream().reduce(null, null);
         print("* SUM : "+(sum==15));
-        Integer sumParsed = Arrays.asList("1", "2", "3").stream().map(Integer::parseInt).reduce(0, Integer::sum);
+        Integer sumParsed = Arrays.asList("1", "2", "3").stream().map((Function<String,Integer>)null).reduce(null, null);
         print("* SUM PARSED: "+(sumParsed==6));
 
-        String joinedStrings = Arrays.asList("1", "2", "3").stream().reduce("PREFIX", (s1, s2) -> s1 + ":" + s2);
+        String joinedStrings = Arrays.asList("1", "2", "3").stream().reduce(null, null);
         print("* JOINED STRINGS: "+(joinedStrings.equals("PREFIX:1:2:3")));
     }
 
@@ -161,12 +145,12 @@ public class EffectsPart1HappyPath {
 
         Customer customer=new Customer(1L,"Exercise3Customer","e3@workshops.com","Lodz",20);
         String expectedCustomerHtml="<div>Customer contact : Exercise3Customer with email : e3@workshops.com</div>";
-        print(" * CUSTOMER TO HTML : "+FrontEnd.customerToHtml.apply(customer).content.equals(expectedCustomerHtml));
+        print(" * CUSTOMER TO HTML : "+ FrontEnd.customerToHtml.apply(customer).content.equals(expectedCustomerHtml));
 
         Product tv=new Product("tv",new BigDecimal("300"), ProductCategory.ELECTRONICS, "Great Tv");
         PurchaseLine exerciseLine=new PurchaseLine(tv,2);
         String expectedLineHTML="<div>tv : 300$ : 2</div>";
-        print(" * PURCHASE LINE TO HTML : "+FrontEnd.purchaseLineToHtml.apply(exerciseLine).content.equals(expectedLineHTML));
+        print(" * PURCHASE LINE TO HTML : "+ FrontEnd.purchaseLineToHtml.apply(exerciseLine).content.equals(expectedLineHTML));
 
         print("\n DISPLAY PURCHASE");
         print(FrontEnd.displayPurchase.apply(data().purchase1));
@@ -181,7 +165,7 @@ public class EffectsPart1HappyPath {
                 .apply(data().jane).compareTo(new BigDecimal("0.4")) == 0));
 
 
-        print("\n CHARGE PURCHASE 1 "+BusinessLogic.charge.apply(data().purchase1));
+        print("\n CHARGE PURCHASE 1 "+ BusinessLogic.charge.apply(data().purchase1));
     }
 
     public static void main(String[] args) {
@@ -215,14 +199,22 @@ public class EffectsPart1HappyPath {
         print("CONSULTANT TO HTML ");
         print(FrontEnd.consultantContactInfo.apply(data().fullConsultant).content);
 
-        print("DISCOUNT CONFIGURATION (JOE): "+BusinessLogic.discountForCustomer.apply(data().joe));
-        print("DISCOUNT CONFIGURATION (JANE): "+BusinessLogic.discountForCustomer.apply(data().jane));
+        print("DISCOUNT CONFIGURATION (JOE): "+ BusinessLogic.discountForCustomer.apply(data().joe));
+        print("DISCOUNT CONFIGURATION (JANE): "+ BusinessLogic.discountForCustomer.apply(data().jane));
 
-        print("\n\n[EXERCISES]");
-        part1().exerciseLevel1();
-        part1().exerciseLevel2();
-        part1().exerciseLevel3();
-        part1().exerciseLevel4();
+//        print("\n\n[EXERCISES]");
+//        part1().exerciseLevel1();
+//        part1().exerciseLevel2();
+//        part1().exerciseLevel3();
+//        part1().exerciseLevel4();
+
+        //Questions to exercise 3
+        //1)What if there is no consultant? What if there is a consultant but it doesn't have a phone?
+
+        //Questions to Exercise 4
+        //1)what if I want to postpone decision about discount? Currently it is hardcoded or provided
+        //at the very begining
+        //2) How do I know if given value was a default value?
     }
 
     static void print(Object s) {
