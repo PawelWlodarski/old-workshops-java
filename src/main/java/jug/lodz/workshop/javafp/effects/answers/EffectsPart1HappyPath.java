@@ -3,20 +3,66 @@ package jug.lodz.workshop.javafp.effects.answers;
 import javaslang.Tuple;
 import javaslang.Tuple2;
 import javaslang.Tuple3;
-import jug.lodz.workshop.javafp.effects.model.Customer;
-import jug.lodz.workshop.javafp.effects.model.Purchase;
+import jug.lodz.workshop.javafp.effects.front.HTML;
+import jug.lodz.workshop.javafp.effects.model.*;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 import static jug.lodz.workshop.javafp.effects.data.PurchaseData.data;
+import static jug.lodz.workshop.javafp.effects.front.HTML.html;
 
 /**
  * Created by pawel on 26.04.16.
  */
 public class EffectsPart1HappyPath {
+
+    static class FrontEnd{
+
+
+        static Function<Consultant,HTML> consultantContactInfo = c -> html(
+                "<div> Contact your consultant : "+c.name+" "+c.picture.asciiArt+"  <br/>" +
+                        "by email : "+c.email+" or by phone "+c.phoneNumber+"</div>"
+        );
+
+        //EXERCISE
+        static <A> Function<A,HTML> insideDiv(Function<A,HTML> toHtml){
+            return a -> html("<div>" +toHtml.apply(a).content +"</div>");
+        }
+
+        static Function<Customer,HTML> cystomerContactInfo = c -> html(
+                "Customer contact : "+c.name+" with email : "+c.email+""
+        );
+
+        //EXERCISE
+        static Function<Customer,HTML> customerToHtml=insideDiv(cystomerContactInfo);
+
+        static Function<Product,String> productToString= p -> p.name +" : "+p.price+"$";
+
+        //EXERCISE
+        static Function<PurchaseLine,HTML> purchaseLineToHtml= insideDiv(
+                p -> html(productToString.apply(p.product)+" : "+p.amount)
+        );
+
+
+        static Function<Purchase,HTML> displayPurchase = insideDiv(p->html(
+          "purchase "+p.id+"<br/>\n" +
+                  "made by : " + customerToHtml.apply(p.customer) + "<br/>\n"+
+                  "consultant : "+consultantContactInfo.apply(p.consultant)  + "<br/>\n"+
+                  "made on : "+p.date+ "<br/>\n"+
+                  p.getLines().stream()
+                          .map(purchaseLineToHtml)
+                          .map(html->html.content)
+                          .collect(Collectors.joining("<br/>\n","PRODUCTS : <br/>\n",""))
+
+
+
+        ));
+    }
+
 
     Function<Customer, BigDecimal> discountForCustomer =
             customer -> customer.name.equals("Joe") ? new BigDecimal("0.3") : BigDecimal.ZERO;
@@ -94,7 +140,26 @@ public class EffectsPart1HappyPath {
     }
 
     void exerciseLevel3(){
-        print("\n[EXERCISE2]");
+        print("\n[EXERCISE3]");
+        Function<Integer,HTML> exerciseFunction= i -> html("number is "+i);
+        print(" * INSIDE DIV CHECK : "+
+                FrontEnd.insideDiv(exerciseFunction).apply(5).content.equals("<div>number is 5</div>"));
+
+        Customer customer=new Customer(1L,"Exercise3Customer","e3@workshops.com","Lodz",20);
+        String expectedCustomerHtml="<div>Customer contact : Exercise3Customer with email : e3@workshops.com</div>";
+        print(" * CUSTOMER TO HTML : "+FrontEnd.customerToHtml.apply(customer).content.equals(expectedCustomerHtml));
+
+        Product tv=new Product("tv",new BigDecimal("300"), ProductCategory.ELECTRONICS, "Great Tv");
+        PurchaseLine exerciseLine=new PurchaseLine(tv,2);
+        String expectedLineHTML="<div>tv : 300$ : 2</div>";
+        print(" * PURCHASE LINE TO HTML : "+FrontEnd.purchaseLineToHtml.apply(exerciseLine).content.equals(expectedLineHTML));
+
+        print("\n DISPLAY PURCHASE");
+        print(FrontEnd.displayPurchase.apply(data().purchase1));
+    }
+
+    void exerciseLevel4(){
+        print("\n[EXERCISE4]");
         print(" * DiscountV1 : "+ (discountV1.apply(data().joe).compareTo(new BigDecimal("0.3")) == 0));
     }
 
@@ -121,11 +186,19 @@ public class EffectsPart1HappyPath {
                 data().purchase1.getLines().stream().map(line -> line.amount).reduce(0,Integer::sum);
         print("Products Bought in Purchase1 : " + numberOfProductsBought);
 
+        print("\n\n* DOMAIN EXAMPLES");
+        Product beer=new Product("beer",new BigDecimal("10"), ProductCategory.FOOD, "tasty berer");
+        Integer gramsOfAlco=Tuple.of(beer,7).transform((b,amount)->amount*4);
+        print(" * GRAMS OF ALCO : Tuple.of(beer,7).transform((b,amount)->amount*4) : "+gramsOfAlco);
+
+        print("CONSULTANT TO HTML ");
+        print(FrontEnd.consultantContactInfo.apply(data().fullConsultant).content);
 
         print("\n\n[EXERCISES]");
         part1().exerciseLevel1();
         part1().exerciseLevel2();
         part1().exerciseLevel3();
+        part1().exerciseLevel4();
     }
 
     static void print(Object s) {

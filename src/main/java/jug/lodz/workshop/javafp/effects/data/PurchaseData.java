@@ -35,21 +35,21 @@ public class PurchaseData {
             new PurchaseLine(speaker,4),
             new PurchaseLine(beer,6)
     );
-    public final Purchase purchase1=new Purchase(lines,"01-05-2016",joe,fullConsultant);
+    public final Purchase purchase1=new Purchase(1, lines,"01-05-2016",joe,fullConsultant);
 
 
     private List<PurchaseLine> lines2= asList(
             new PurchaseLine(book,2),
             new PurchaseLine(lamp,1)
     );
-    public final Purchase purchase2=new Purchase(lines2,"01-05-2016",jane,phoneConsultant);
+    public final Purchase purchase2=new Purchase(2, lines2,"01-05-2016",jane,phoneConsultant);
 
 
     private List<PurchaseLine> lines3= asList(
             new PurchaseLine(sugar,20),
             new PurchaseLine(yeast,30)
     );
-    public final Purchase purchase3=new Purchase(lines3,"01-05-2016",joe,null);
+    public final Purchase purchase3=new Purchase(3, lines3,"01-05-2016",joe,null);
 
 
     public static PurchaseData data(){return new PurchaseData();}
