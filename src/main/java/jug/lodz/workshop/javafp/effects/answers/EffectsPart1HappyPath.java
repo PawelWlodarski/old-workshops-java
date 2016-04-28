@@ -8,6 +8,8 @@ import jug.lodz.workshop.javafp.effects.model.*;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -64,49 +66,61 @@ public class EffectsPart1HappyPath {
     }
 
 
-    Function<Customer, BigDecimal> discountForCustomer =
-            customer -> customer.name.equals("Joe") ? new BigDecimal("0.3") : BigDecimal.ZERO;
+    static class BusinessLogic {
+        static Function<Set<Customer>,Function<Customer, BigDecimal>> discountsConfiguration = customersWithDiscount->
+                customer -> customersWithDiscount.contains(customer.name)? new BigDecimal("0.3") : BigDecimal.ZERO;
 
-    Function<String, BigDecimal> discountForACity = city -> city.equals("Lodz") ? new BigDecimal("0.2") : BigDecimal.ZERO;
+        static Function<Customer, BigDecimal> discountForCustomer=discountsConfiguration.apply(new HashSet(Arrays.asList("Joe")));
 
-
-    Function<Customer, BigDecimal> discountV1 = c -> {
-        BigDecimal customerDiscount = discountForCustomer.apply(c);
-        if(customerDiscount.compareTo(BigDecimal.ZERO) != 0) return customerDiscount;
-
-        BigDecimal cityDiscount = discountForACity.apply(c.city);
-        if (cityDiscount.compareTo(BigDecimal.ZERO) != 0) return cityDiscount;
-
-        return BigDecimal.ZERO;
-    };
-
-    Function<BigDecimal,Function<Customer, BigDecimal>> discountV2 = defaultDiscount->c -> {
-        BigDecimal customerDiscount = discountForCustomer.apply(c);
-        if(customerDiscount.compareTo(BigDecimal.ZERO) != 0) return customerDiscount;
-
-        BigDecimal cityDiscount = discountForACity.apply(c.city);
-        if (cityDiscount.compareTo(BigDecimal.ZERO) != 0) return cityDiscount;
-
-        return defaultDiscount;
-    };
-
-    Function<Supplier<BigDecimal>,Function<Customer, BigDecimal>> discountV3 = defaultDiscount-> c -> {
-        BigDecimal customerDiscount = discountForCustomer.apply(c);
-        if(customerDiscount.compareTo(BigDecimal.ZERO) != 0) return customerDiscount;
-
-        BigDecimal cityDiscount = discountForACity.apply(c.city);
-        if (cityDiscount.compareTo(BigDecimal.ZERO) != 0) return cityDiscount;
-
-        return defaultDiscount.get();
-    };
-
-    Function<Purchase,BigDecimal> calculatePrice= p->
-        p.getLines().stream().map(line->line.product.price).reduce(BigDecimal.ZERO, BigDecimal::add);
+        static Function<String, BigDecimal> discountForACity = city -> city.equals("Lodz") ? new BigDecimal("0.2") : BigDecimal.ZERO;
 
 
-    Function<Purchase,BigDecimal> charge = p-> Tuple
-            .of(calculatePrice.apply(p),discountV1.apply(p.customer))
-            .transform(BigDecimal::subtract);
+        //EXERCISE
+        static Function<Customer, BigDecimal> discountV1 = c -> {
+            BigDecimal customerDiscount = discountForCustomer.apply(c);
+            if(customerDiscount.compareTo(BigDecimal.ZERO) != 0) return customerDiscount;
+
+            BigDecimal cityDiscount = discountForACity.apply(c.city);
+            if (cityDiscount.compareTo(BigDecimal.ZERO) != 0) return cityDiscount;
+
+            return BigDecimal.ZERO;
+        };
+
+
+        //EXERCISE
+        static Function<BigDecimal,Function<Customer, BigDecimal>> discountV2 = defaultDiscount->c -> {
+            BigDecimal customerDiscount = discountForCustomer.apply(c);
+            if(customerDiscount.compareTo(BigDecimal.ZERO) != 0) return customerDiscount;
+
+            BigDecimal cityDiscount = discountForACity.apply(c.city);
+            if (cityDiscount.compareTo(BigDecimal.ZERO) != 0) return cityDiscount;
+
+            return defaultDiscount;
+        };
+
+        //EXERCISE
+        static Function<Supplier<BigDecimal>,Function<Customer, BigDecimal>> discountV3 = defaultDiscount-> c -> {
+            BigDecimal customerDiscount = discountForCustomer.apply(c);
+            if(customerDiscount.compareTo(BigDecimal.ZERO) != 0) return customerDiscount;
+
+            BigDecimal cityDiscount = discountForACity.apply(c.city);
+            if (cityDiscount.compareTo(BigDecimal.ZERO) != 0) return cityDiscount;
+
+            return defaultDiscount.get();
+        };
+
+        //EXERCISE
+        static Function<Purchase,BigDecimal> calculatePrice= p->
+                p.getLines().stream().map(line->line.product.price).reduce(BigDecimal.ZERO, BigDecimal::add);
+
+
+        static Function<Purchase,Tuple3<BigDecimal,BigDecimal,BigDecimal>> charge = p-> Tuple
+                .of(calculatePrice.apply(p),discountV1.apply(p.customer))
+                .map((price,discount)->Tuple.of(price,price.multiply(discount)))
+                .transform((price,totalDiscount)->Tuple.of(price,totalDiscount,price.subtract(totalDiscount)));
+    }
+
+
 
 
     void exerciseLevel1(){
@@ -160,7 +174,14 @@ public class EffectsPart1HappyPath {
 
     void exerciseLevel4(){
         print("\n[EXERCISE4]");
-        print(" * DiscountV1 : "+ (discountV1.apply(data().joe).compareTo(new BigDecimal("0.3")) == 0));
+        print(" * DiscountV1 : "+ (BusinessLogic.discountV1.apply(data().joe).compareTo(new BigDecimal("0.3")) == 0));
+        print(" * DiscountV2 : "+ (BusinessLogic.discountV2.apply(new BigDecimal("0.5"))
+                .apply(data().jane).compareTo(new BigDecimal("0.5")) == 0));
+        print(" * DiscountV3 : "+ (BusinessLogic.discountV3.apply(() -> new BigDecimal("0.4"))
+                .apply(data().jane).compareTo(new BigDecimal("0.4")) == 0));
+
+
+        print("\n CHARGE PURCHASE 1 "+BusinessLogic.charge.apply(data().purchase1));
     }
 
     public static void main(String[] args) {
@@ -193,6 +214,9 @@ public class EffectsPart1HappyPath {
 
         print("CONSULTANT TO HTML ");
         print(FrontEnd.consultantContactInfo.apply(data().fullConsultant).content);
+
+        print("DISCOUNT CONFIGURATION (JOE): "+BusinessLogic.discountForCustomer.apply(data().joe));
+        print("DISCOUNT CONFIGURATION (JANE): "+BusinessLogic.discountForCustomer.apply(data().jane));
 
         print("\n\n[EXERCISES]");
         part1().exerciseLevel1();
