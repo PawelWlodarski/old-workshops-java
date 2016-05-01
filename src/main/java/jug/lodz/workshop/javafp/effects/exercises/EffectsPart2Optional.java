@@ -75,6 +75,11 @@ public class EffectsPart2Optional {
                 .orElse(Option.of("5"))
                 .map(readGrossPrice)
                 .forEach(gross->print("  * PARSED OPTION NONE "+gross));
+
+
+        print("\n * [BONUS]");
+        print("  * STANDARD Some orElse Some: "+Optional.of(1).map(Optional::of).orElse(Optional.of(2)).get());
+        print("  * STANDARD None orElse Some: "+Optional.empty().map(Optional::of).orElse(Optional.of(2)).get());
     }
 
     static void exercise1(){
