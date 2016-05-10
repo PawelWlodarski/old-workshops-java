@@ -35,12 +35,12 @@ public class EffectsPart1HappyPathAnswer {
             return a -> html("<div>" +toHtml.apply(a).content +"</div>");
         }
 
-        static Function<Customer,HTML> cystomerContactInfo = c -> html(
+        static Function<Customer,HTML> customerContactInfo = c -> html(
                 "Customer contact : "+c.name+" with email : "+c.email+""
         );
 
         //EXERCISE
-        static Function<Customer,HTML> customerToHtml=insideDiv(cystomerContactInfo);
+        static Function<Customer,HTML> customerToHtml=insideDiv(customerContactInfo);
 
         static Function<Product,String> productToString= p -> p.name +" : "+p.price+"$";
 

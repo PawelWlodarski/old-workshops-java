@@ -21,7 +21,7 @@ public class PurchaseData {
     public final Product tv=new Product("tv",new BigDecimal("300"), ProductCategory.ELECTRONICS, "Great Tv");
     public final Product console=new Product("console",new BigDecimal("200"), ProductCategory.ELECTRONICS, null);
     public final Product speaker=new Product("speaker",new BigDecimal("70"), ProductCategory.ELECTRONICS, null);
-    public final Product beer=new Product("beer",new BigDecimal("10"), ProductCategory.FOOD, "tasty berer");
+    public final Product beer=new Product("beer",new BigDecimal("10"), ProductCategory.FOOD, "tasty beer");
     public final Product book=new Product("book",new BigDecimal("15"), ProductCategory.EDUCATION, "very interesting book");
     public final Product lamp=new Product("lamp",new BigDecimal("25"), ProductCategory.ELECTRONICS, null);
     public final Product sugar=new Product("sugar",new BigDecimal("3"), ProductCategory.FOOD, null);

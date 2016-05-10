@@ -141,7 +141,7 @@ public class EffectsPart4Error {
 
         // EXERCISE
         //read discount
-        //apply happy path
+        //apply happy path  with new BigDecimal("100"))   <------
         //if failure - notify
         //convert to optiion
         Function<Customer, Option<BigDecimal>> applyDiscount = null;

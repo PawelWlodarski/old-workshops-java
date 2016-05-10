@@ -36,7 +36,7 @@ public class EffectsPart1HappyPath {
             return null;
         }
 
-        static Function<Customer,HTML> cystomerContactInfo = c -> html(
+        static Function<Customer,HTML> customerContactInfo = c -> html(
                 "Customer contact : "+c.name+" with email : "+c.email+""
         );
 
