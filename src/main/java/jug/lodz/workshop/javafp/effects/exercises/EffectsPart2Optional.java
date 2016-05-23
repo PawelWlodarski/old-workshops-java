@@ -29,8 +29,9 @@ public class EffectsPart2Optional {
 
         print(" * OPTIONAL & NULL");
 
-        print("  *possible null : some ="+Optional.ofNullable("notNull"));
-        print("  *possible null : none ="+Optional.ofNullable(null));
+//KATA
+//        print("  *possible null : some ="+Optional.ofNullable("notNull"));
+//        print("  *possible null : none ="+Optional.ofNullable(null));
 
         print(" * MAPPING IN OPTIONAL CONTEXT");
         Function<String,Integer> parse = Integer::parseInt;
@@ -38,11 +39,13 @@ public class EffectsPart2Optional {
 
         Function<String, Double> readGrossPrice = parse.andThen(addTax);
 
-        print("  * Gross 10 : "+readGrossPrice.apply("10"));
-        print("  * Gross 50 : "+readGrossPrice.apply("50"));
+//KATA
+//        print("  * Gross 10 : "+readGrossPrice.apply("10"));
+//        print("  * Gross 50 : "+readGrossPrice.apply("50"));
 
         Optional<String> potentialStringValue = Optional.of("10");
-        print("  * Gross 10 from optional: "+ potentialStringValue.map(readGrossPrice));
+//KATA
+//        print("  * Gross 10 from optional: "+ potentialStringValue.map(readGrossPrice));
 
 
         //Example with Wrapper class
@@ -50,13 +53,14 @@ public class EffectsPart2Optional {
 
         potentialStringValue.map(readGrossPrice).orElse(0.0);
         Supplier<Double> longCalculations=()->0.0;
-        Double grossOrDefault = potentialStringValue.map(readGrossPrice).orElseGet(longCalculations);
-        print("  * Some(Gross 10) : "+grossOrDefault);
+//KATA
+//        Double grossOrDefault = potentialStringValue.map(readGrossPrice).orElseGet(longCalculations);
+//        print("  * Some(Gross 10) : "+grossOrDefault);
 
         Double defaultFromEmpty = Optional.<String>empty().map(readGrossPrice).orElseGet(longCalculations);
-        print("  * None : "+defaultFromEmpty);
+//        print("  * None : "+defaultFromEmpty);
 
-        potentialStringValue.map(readGrossPrice).ifPresent(gross -> print("  * ifPresent "+gross));
+//        potentialStringValue.map(readGrossPrice).ifPresent(gross -> print("  * ifPresent "+gross));
 
         print("\n * OPTION -  JAVASLANG");
         Option<String> slangSome=Option.of("10");
@@ -65,16 +69,16 @@ public class EffectsPart2Optional {
         print("  * TO JAVA OPTIONAL : "+slangSome.toJavaOptional());
         print("  * FROM JAVA OPTIONAL : "+Option.ofOptional(potentialStringValue));
 
+// KATA
+//        Option.ofOptional(potentialStringValue)
+//                .orElse(Option.of("5"))
+//                .map(readGrossPrice)
+//                .forEach(gross->print("  * PARSED OPTION SOME "+gross));
 
-        Option.ofOptional(potentialStringValue)
-                .orElse(Option.of("5"))
-                .map(readGrossPrice)
-                .forEach(gross->print("  * PARSED OPTION SOME "+gross));
-
-        Option.ofOptional(Optional.<String>empty())
-                .orElse(Option.of("5"))
-                .map(readGrossPrice)
-                .forEach(gross->print("  * PARSED OPTION NONE "+gross));
+//        Option.ofOptional(Optional.<String>empty())
+//                .orElse(Option.of("5"))
+//                .map(readGrossPrice)
+//                .forEach(gross->print("  * PARSED OPTION NONE "+gross));
 
 
         print("\n * [BONUS]");

@@ -43,9 +43,10 @@ public class EffectsPart4Error {
                                 .flatMap(b -> divide.apply(a, b)));
 
         print(" * [PARSE AND DIVIDE WITH OPTION]");
-        print("  * 4/2 : " + parseAndDivide.apply("4", "2"));
-        print("  * 4/aaa : " + parseAndDivide.apply("4", "aaa"));
-        print("  * 4/0 : " + parseAndDivide.apply("4", "0"));
+// KATA
+//        print("  * 4/2 : " + parseAndDivide.apply("4", "2"));
+//        print("  * 4/aaa : " + parseAndDivide.apply("4", "aaa"));
+//        print("  * 4/0 : " + parseAndDivide.apply("4", "0"));
 
 
         Function<String, Try<Integer>> tryParse = s -> Try.of(() -> Integer.parseInt(s)); //LAZY !! EXPLAIN
@@ -58,13 +59,16 @@ public class EffectsPart4Error {
                                 .flatMap(b -> tryDivide.apply(a, b)));
 
         print(" * [PARSE AND DIVIDE WITH TRY]");
-        print("  * 4/2 : " + tryParseAndDivide.apply("4", "2"));
-        print("  * 4/aaa : " + tryParseAndDivide.apply("4", "aaa"));
-        print("  * 4/0 : " + tryParseAndDivide.apply("4", "0"));
+// KATA
+//        print("  * 4/2 : " + tryParseAndDivide.apply("4", "2"));
+//        print("  * 4/aaa : " + tryParseAndDivide.apply("4", "aaa"));
+//        print("  * 4/0 : " + tryParseAndDivide.apply("4", "0"));
 
 
-        tryParseAndDivide.apply("4", "aaa").onSuccess(result -> print("  * success : " + result));
-        tryParseAndDivide.apply("4", "2").onSuccess(result -> print("  * success : " + result));
+
+// KATA
+//        tryParseAndDivide.apply("4", "aaa").onSuccess(result -> print("  * success : " + result));
+//        tryParseAndDivide.apply("4", "2").onSuccess(result -> print("  * success : " + result));
 
         BiFunction<String, String, HTML> divideAndRecover = (a, b) -> tryParseAndDivide.apply(a, b)
                 .map(i -> "<div>Result is " + i + " </div>")
@@ -75,9 +79,9 @@ public class EffectsPart4Error {
                 );
 
         print(" * [CALCULATION AND RECOVER]");
-        print("  * 4/2 : " + divideAndRecover.apply("4", "2"));
-        print("  * 4/0 : " + divideAndRecover.apply("4", "0"));
-        print("  * 4/aaa : " + divideAndRecover.apply("4", "aaa"));
+//        print("  * 4/2 : " + divideAndRecover.apply("4", "2"));
+//        print("  * 4/0 : " + divideAndRecover.apply("4", "0"));
+//        print("  * 4/aaa : " + divideAndRecover.apply("4", "aaa"));
     }
 
     static void exerciseLevel1() {

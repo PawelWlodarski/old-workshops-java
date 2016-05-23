@@ -173,28 +173,33 @@ public class EffectsPart1HappyPath {
         print("* TUPLE");
         Tuple2<String, Integer> tuple = Tuple.of("word", 10);
 
-        print("MAP1 : " + tuple.map1(s -> s + "_mapped"));
-        print("MAP2 : " + tuple.map2(i -> i + 5));
+// KATA
+//        print("MAP1 : " + tuple.map1(s -> s + "_mapped"));
+//        print("MAP2 : " + tuple.map2(i -> i + 5));
 
         print("TRANSFORM : Tuple.of(10,3)" );
-        Integer result = Tuple.of(10, 3).transform((e1, e2) -> e1 - e2);
-        print("TRANSFORM RESULT : " +result);
+//KATA
+//        Integer result = Tuple.of(10, 3).transform((e1, e2) -> e1 - e2);
+//        print("TRANSFORM RESULT : " +result);
 
         print("\n* MAPPING COLLECTION");
         print("* PRODUCTS IN PURCHASE 1");
-        data().purchase1.getLines().stream()
-                .map(line -> Tuple.of(line.product.name,line.amount))
-                .forEach(System.out::println);
+//KATA
+//        data().purchase1.getLines().stream()
+//                .map(line -> Tuple.of(line.product.name,line.amount))
+//                .forEach(System.out::println);
 
         print("* COUNTING TOTAL PRODUCTS IN PURCHASE 1");
-        Integer numberOfProductsBought=
-                data().purchase1.getLines().stream().map(line -> line.amount).reduce(0,Integer::sum);
-        print("Products Bought in Purchase1 : " + numberOfProductsBought);
+//KATA
+//        Integer numberOfProductsBought=
+//                data().purchase1.getLines().stream().map(line -> line.amount).reduce(0,Integer::sum);
+//        print("Products Bought in Purchase1 : " + numberOfProductsBought);
 
         print("\n\n* DOMAIN EXAMPLES");
         Product beer=new Product("beer",new BigDecimal("10"), ProductCategory.FOOD, "tasty berer");
-        Integer gramsOfAlco=Tuple.of(beer,7).transform((b,amount)->amount*4);
-        print(" * GRAMS OF ALCO : Tuple.of(beer,7).transform((b,amount)->amount*4) : "+gramsOfAlco);
+//KATA
+//        Integer gramsOfAlco=Tuple.of(beer,7).transform((b,amount)->amount*4);
+//        print(" * GRAMS OF ALCO : Tuple.of(beer,7).transform((b,amount)->amount*4) : "+gramsOfAlco);
 
         print("CONSULTANT TO HTML ");
         print(FrontEnd.consultantContactInfo.apply(data().fullConsultant).content);

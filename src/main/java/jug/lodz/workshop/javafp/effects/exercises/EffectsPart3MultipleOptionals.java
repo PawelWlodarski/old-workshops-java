@@ -34,27 +34,28 @@ public class EffectsPart3MultipleOptionals {
         };
 
         Function<Integer, Optional<String>> lookup = id -> (id == 5) ? Optional.of("Zygfryd") : Optional.empty();
-
-        Optional<Optional<String>> result1 = parse.apply("10").map(lookup);
-        print("  * MAP : parse & lookup : " + result1);
+//KATA
+//        Optional<Optional<String>> result1 = parse.apply("10").map(lookup);
+//        print("  * MAP : parse & lookup : " + result1);
 
 
         print("  * [MAP : phases]");
-        Optional<Integer> parsingResult = parse.apply("10");
-        print("  * MAP : parsing result : " + parsingResult);
+//        Optional<Integer> parsingResult = parse.apply("10");
+//        print("  * MAP : parsing result : " + parsingResult);
+//
+//        Optional<Optional<String>> lookupResult = parsingResult.map(lookup);
+//        print("  * MAP : lookup result : " + lookupResult);
 
-        Optional<Optional<String>> lookupResult = parsingResult.map(lookup);
-        print("  * MAP : lookup result : " + lookupResult);
 
-
-        Optional<String> flatMapResult = parse.apply("10").flatMap(lookup);
-        print("  * FLATMAP : " + flatMapResult);
+//KATA
+//        Optional<String> flatMapResult = parse.apply("10").flatMap(lookup);
+//        print("  * FLATMAP : " + flatMapResult);
 
 
         print("\n  * [FLAT MAP COMBINATIONS]");
-        print("  * Some.flatMap[Some] : " + Optional.of(1).flatMap(i -> Optional.of(i + 1)));
-        print("  * Some.flatMap[None] : " + Optional.of(1).flatMap(i -> Optional.empty()));
-        print("  * None.flatMap[Some] : " + Optional.<Integer>empty().flatMap(i -> Optional.of(i + 1)));
+//        print("  * Some.flatMap[Some] : " + Optional.of(1).flatMap(i -> Optional.of(i + 1)));
+//        print("  * Some.flatMap[None] : " + Optional.of(1).flatMap(i -> Optional.empty()));
+//        print("  * None.flatMap[Some] : " + Optional.<Integer>empty().flatMap(i -> Optional.of(i + 1)));
 
         print("\n  * [JAVA SLANG FOR]");
 
