@@ -1,6 +1,7 @@
 package jug.lodz.workshop.javafp.effects.answers;
 
 import javaslang.control.Option;
+import jug.lodz.workshop.Checker;
 import jug.lodz.workshop.javafp.effects.front.HTML;
 import jug.lodz.workshop.javafp.effects.model.Customer;
 import jug.lodz.workshop.javafp.effects.model.Product;
@@ -136,12 +137,13 @@ public class EffectsPart2OptionalAnswer {
                 .getOrElse(0.0);
 
 
-        print("  * OPTIONAL JOE : "+optionalJoe);
-        print("  * OPTIONAL JOE RESULT : "+joeResult);
-        print("  * OPTIONAL JANE : "+optionalJane);
-        print("  * OPTIONAL JANE RESULT : "+janeResult);
-        print("  * OPTIONAL ZYGFRYD : "+optionalZygfryd);
-        print("  * OPTIONAL ZYGFRYD RESULT : "+zygfrydResult);
+        Checker.check("OPTIONAL JOE",optionalJoe,Optional.of("10.0"));
+        Checker.check("OPTIONAL JOE RESULT",joeResult,2.0);
+        Checker.check("OPTIONAL JANE",optionalJane,Optional.empty());
+        Checker.check("OPTIONAL JANE RESULT",janeResult,6.0);
+        Checker.check("OPTIONAL ZYGFRYD",optionalZygfryd,Optional.empty());
+        Checker.check("OPTIONAL ZYGFRYD RESULT",zygfrydResult,0.0);
+
 
     }
 
@@ -152,8 +154,8 @@ public class EffectsPart2OptionalAnswer {
 
     public static void exercise3(){
         print("\n[EXERCISE3]");
-        print("  * PRODUCT WITH DESCRIPTION : " + displayProduct(data().tv).content.equals("tv:Great Tv"));
-        print("  * PRODUCT WITHOUT DESCRIPTION : "+displayProduct(data().console).content.equals("console:NO DESCRIPTION AVAILABLE"));
+        Checker.check("PRODUCT WITH DESCRIPTION",displayProduct(data().tv).content,"tv:Great Tv");
+        Checker.check("PRODUCT WITHOUT DESCRIPTION",displayProduct(data().console).content,"console:NO DESCRIPTION AVAILABLE");
     }
 
     public static void exercise4(){

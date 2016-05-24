@@ -1,6 +1,7 @@
 package jug.lodz.workshop.javafp.effects.exercises;
 
 import javaslang.control.Option;
+import jug.lodz.workshop.Checker;
 import jug.lodz.workshop.javafp.effects.front.HTML;
 import jug.lodz.workshop.javafp.effects.model.Customer;
 import jug.lodz.workshop.javafp.effects.model.Product;
@@ -10,6 +11,7 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import static jug.lodz.workshop.Checker.check;
 import static jug.lodz.workshop.javafp.effects.data.PurchaseData.data;
 
 /**
@@ -147,13 +149,12 @@ public class EffectsPart2Optional {
                 .<Double>map(null)
                 .getOrElse(0.0);
 
-
-        print("  * OPTIONAL JOE : "+optionalJoe);
-        print("  * OPTIONAL JOE RESULT : "+joeResult);
-        print("  * OPTIONAL JANE : "+optionalJane);
-        print("  * OPTIONAL JANE RESULT : "+janeResult);
-        print("  * OPTIONAL ZYGFRYD : "+optionalZygfryd);
-        print("  * OPTIONAL ZYGFRYD RESULT : "+zygfrydResult);
+        check("OPTIONAL JOE",optionalJoe,Optional.of("10.0"));
+        check("OPTIONAL JOE RESULT",joeResult,2.0);
+        check("OPTIONAL JANE",optionalJane,Optional.empty());
+        check("OPTIONAL JANE RESULT",janeResult,6.0);
+        check("OPTIONAL ZYGFRYD",optionalZygfryd,Optional.empty());
+        check("OPTIONAL ZYGFRYD RESULT",zygfrydResult,0.0);
 
     }
 
@@ -165,8 +166,8 @@ public class EffectsPart2Optional {
     //EXERCISE3 ASSERTIONS
     public static void exercise3(){
         print("\n[EXERCISE3]");
-        print("  * PRODUCT WITH DESCRIPTION : " + displayProduct(data().tv).content.equals("tv:Great Tv"));
-        print("  * PRODUCT WITHOUT DESCRIPTION : "+displayProduct(data().console).content.equals("console:NO DESCRIPTION AVAILABLE"));
+        check("PRODUCT WITH DESCRIPTION",displayProduct(data().tv).content,"tv:Great Tv");
+        check("PRODUCT WITHOUT DESCRIPTION",displayProduct(data().console).content,"console:NO DESCRIPTION AVAILABLE");
     }
 
     public static void exercise4(){
