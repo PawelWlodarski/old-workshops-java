@@ -27,6 +27,7 @@ public class StreamsPart1Intro implements Printer {
         println("  * EXAMPLE1 foreach on  pure list");
         Arrays.asList(1,2,3,4,5).forEach(e->print(e+","));
 
+        //transformation and termination
         println("\n\n  * EXAMPLE2 stream with mapping");
         Arrays.asList(1,2,3,4,5).stream()
                 .map(e->e+1)
@@ -59,7 +60,7 @@ public class StreamsPart1Intro implements Printer {
         step1b.map(composed).forEach(this::print); // why it is the same
 
 
-
+        //termination
         println("\n\n  * EXAMPLE5 : Reduce");
         Integer sum1 = Arrays.asList(1, 2, 3, 4, 5).stream().reduce(0, (e1, e2) -> e1 + e2);
         Integer sum2 = Arrays.asList(1, 2, 3, 4, 5).stream().reduce(0, Integer::sum);
