@@ -1,4 +1,4 @@
-package jug.lodz.workshop.javafp.streams.answers;
+package jug.lodz.workshop.javafp.streams.exercises;
 
 
 import jug.lodz.workshop.Printer;
@@ -29,17 +29,19 @@ public class StreamsPart1Intro implements Printer {
 
         //transformation and termination
         println("\n\n  * EXAMPLE2 stream with mapping");
-        Arrays.asList(1,2,3,4,5).stream()
-                .map(e->e+1)
-                .forEach(e->print(e+","));
+        Arrays.asList(1,2,3,4,5).stream();
+        //CK
+//                .map(e->e+1)
+//                .forEach(e->print(e+","));
 
         println("\n\n  * EXAMPLE3 : stream with collector - joinig ");
-        String result = Arrays.asList(1, 2, 3, 4, 5).stream()
-                .map(e -> e + 1)
-                .map(e -> e.toString())
-                .collect(Collectors.joining(","));
+        Arrays.asList(1, 2, 3, 4, 5).stream();
+        //CK
+//                .map(e -> e + 1)
+//                .map(e -> e.toString())
+//                .collect(Collectors.joining(","));
 
-        print(result);
+//        print(result);
 
         println("\n\n  * EXAMPLE4 : mapping stream content with external functions");
 
@@ -47,26 +49,28 @@ public class StreamsPart1Intro implements Printer {
         Function<Integer,Integer> square=i->i*i;
 
         Stream<String> step1 = Arrays.asList("1", "2", "3", "4", "5").stream();
-        Stream<Integer> step2 = step1.map(parseInt);
-        Stream<Integer> step3 = step2.map(square);
-
-        step3.map(e->e+" ").forEach(this::print);
+        //CK
+//        Stream<Integer> step2 = step1.map(parseInt);
+//        Stream<Integer> step3 = step2.map(square);
+//
+//        step3.map(e->e+" ").forEach(this::print);
 
         println("\n\n  * EXAMPLE4b : something very powerful");
 
         Function<String, String> composed = parseInt.andThen(square).andThen(e->e+" ");
 
         Stream<String> step1b = Arrays.asList("1", "2", "3", "4", "5").stream(); //why do we need to define stream1 once again?
-        step1b.map(composed).forEach(this::print); // why it is the same
+//        step1b.map(composed).forEach(this::print); // why it is the same
 
 
         //termination
         println("\n\n  * EXAMPLE5 : Reduce");
-        Integer sum1 = Arrays.asList(1, 2, 3, 4, 5).stream().reduce(0, (e1, e2) -> e1 + e2);
-        Integer sum2 = Arrays.asList(1, 2, 3, 4, 5).stream().reduce(0, Integer::sum);
-
-        println(" sum1 : "+sum1);
-        println(" sum2 : "+sum2);
+        //CK
+//        Integer sum1 = Arrays.asList(1, 2, 3, 4, 5).stream().reduce(0, (e1, e2) -> e1 + e2);
+//        Integer sum2 = Arrays.asList(1, 2, 3, 4, 5).stream().reduce(0, Integer::sum);
+//
+//        println(" sum1 : "+sum1);
+//        println(" sum2 : "+sum2);
 
     }
 
