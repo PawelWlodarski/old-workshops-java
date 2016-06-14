@@ -72,6 +72,14 @@ public class StreamsPart1Intro implements Printer {
 //        println(" sum1 : "+sum1);
 //        println(" sum2 : "+sum2);
 
+
+        println("\n\n  * EXAMPLE6 : Reduce step by step");
+
+//        Arrays.asList(1,2,3,4,5).stream().reduce(0, (acc,elem)->{
+//            println("acc : "+acc+", elem : "+elem);
+//            return acc+elem;
+//        });
+
     }
 
 
