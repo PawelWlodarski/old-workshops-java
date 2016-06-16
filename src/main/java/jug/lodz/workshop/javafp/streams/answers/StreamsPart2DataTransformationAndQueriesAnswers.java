@@ -15,9 +15,9 @@ import java.util.stream.Stream;
 /**
  * Created by pawel on 07.06.16.
  */
-public class StreamsPart2DataTransformationAndQueries implements Printer {
+public class StreamsPart2DataTransformationAndQueriesAnswers implements Printer {
 
-    private static StreamsPart2DataTransformationAndQueries lab = new StreamsPart2DataTransformationAndQueries();
+    private static StreamsPart2DataTransformationAndQueriesAnswers lab = new StreamsPart2DataTransformationAndQueriesAnswers();
 
     public static void main(String[] args) {
         lab.demo();
@@ -117,7 +117,3 @@ public class StreamsPart2DataTransformationAndQueries implements Printer {
                 .map(Transactions.FlatTransaction::new);
     }
 }
-
-
-//count
-// max & min  // Comparator.comparing

@@ -77,6 +77,15 @@ public class StreamsPart1IntroExercisesAnswer {
         assertThat(names).containsExactly("tv","console","mouse","speakers");
     }
 
+    @Test
+    public void countNumberOfElementsWithMapReduce() throws Exception {
+        Integer numberOfProducts = products()
+                .map(p -> 1)
+                .reduce(0, Integer::sum);
+
+        assertThat(numberOfProducts).isEqualTo(4);
+
+    }
 
     // Level 3
     @Test

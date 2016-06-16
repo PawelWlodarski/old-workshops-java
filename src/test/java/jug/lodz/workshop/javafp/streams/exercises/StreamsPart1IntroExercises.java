@@ -22,18 +22,26 @@ public class StreamsPart1IntroExercises {
 
 
     // Level 1
+
+    /**
+     *  1) map stream to add one to each element
+     */
     @Test
     public void simpleMapping_JustAddOneToCreatedStream() throws Exception {
         List<Integer> start = Arrays.asList(1, 2, 3, 4, 5);
 
-        Stream<Integer> result = start.stream();
+        Stream<Integer> result = start.stream(); // add one
 
         assertThat(result.collect(Collectors.toList())).containsExactly(2,3,4,5,6);
     }
 
+
+    /**
+     * 1) complete function getName so it returns product name
+     */
     @Test
     public void singleFunctionObjectMapping_extractName() throws Exception {
-        Function<Product,String> getName=null;
+        Function<Product,String> getName=null; // complete this
 
         Stream<String> names = products().map(getName);
 
@@ -41,10 +49,14 @@ public class StreamsPart1IntroExercises {
     }
 
 
+    /**
+     *  1) extract price which is String
+     *  2) convert price to BigDecimal
+     */
     @Test
     public void multipleFunctionsMapping_extractPriceAndConvertToBigDecimal() throws Exception {
-        Function<Product,String> getPrice=null;
-        Function<String,BigDecimal> toBigDecimal=null;
+        Function<Product,String> getPrice=null;      //complete this
+        Function<String,BigDecimal> toBigDecimal=null; //complete this
 
         Stream<BigDecimal> prices =
                 products().map(getPrice).map(toBigDecimal);
@@ -55,7 +67,11 @@ public class StreamsPart1IntroExercises {
     }
 
     //LEVEL 2
-
+    /**
+     *  1) extract price which is String
+     *  2) convert price to BigDecimal
+     *  3) sum all prices
+     */
     @Test
     public void sumAllPrices_extractPricesChangeToBigDecimalAndReduce() throws Exception {
         Function<Product,String> getPrice=null;
@@ -68,17 +84,39 @@ public class StreamsPart1IntroExercises {
         assertThat(result).isEqualTo(new BigDecimal("565.5"));
     }
 
+    /**
+     * 1) write each name to mutable list "names"
+     */
     @Test
     public void rewritewithForeach() throws Exception {
         List<String> names=new LinkedList<>();
 
-        products().forEach(null);
+        products().forEach(null); // write to names
 
         assertThat(names).containsExactly("tv","console","mouse","speakers");
     }
 
 
+    /**
+     *  1) map to one
+     *  2) reduce by adding all values
+     */
+    @Test
+    public void countNumberOfElementsWithMapReduce() throws Exception {
+        Integer numberOfProducts = products()
+                .<Integer>map(null)
+                .reduce(null,null);
+
+        assertThat(numberOfProducts).isEqualTo(4);
+
+    }
+
+
     // Level 3
+
+    /**
+     *  complete basicMapReduce method which is listed below
+     */
     @Test
     public void mapReduceTest() throws Exception {
         List<String> input = Arrays.asList("1", "2", "3","4");
@@ -91,10 +129,14 @@ public class StreamsPart1IntroExercises {
 
     }
 
+    //EXERCISE
     private <A,B> B basicMapReduce(Function<A,B> map, BinaryOperator<B> reduce, B identity, Stream<A> input){
         return null;
     }
 
+    /**
+     *  write map in terms of "forEach" - complete "mapInTermsOfForEach"
+     */
     @Test
     public void  mapInTermsOfForEach() throws Exception {
         Collection<String> result = mapInTermsOfForEach(products(), p -> p.name);
@@ -102,6 +144,7 @@ public class StreamsPart1IntroExercises {
         assertThat(result).containsExactly("tv","console","mouse","speakers");
     }
 
+    // EXERCISE
     private <A,B> Collection<B>  mapInTermsOfForEach(Stream<A> input,Function<A,B> f){
         Collection<B> result=new LinkedList<>();
 
@@ -110,6 +153,9 @@ public class StreamsPart1IntroExercises {
         return result;
     }
 
+    /**
+     *  write map in terms of "reduce" - complete "mapInTermsOfReduce"
+     */
     @Test
     public void mapsInTermsOfReduce() throws Exception {
         Collection<String> result = mapInTermsOfReduce(products(), p -> p.name);
