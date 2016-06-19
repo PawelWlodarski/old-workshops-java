@@ -66,36 +66,3 @@ public class StreamsPart4LazyComputationExercisesAnswer {
     }
 }
 
-
-
-/**
- * Stream.iterate(0, n -> n + 2)
- * .limit(10)
- * .forEach(System.out::println);
- * <p>
- * Fibonacci
- * Stream.iterate(new int[]{0, 1},
- * t -> new int[]{t[1],t[0] + t[1]})
- * .limit(10)
- * .map(t -> t[0])
- * .forEach(System.out::println);
- * <p>
- * Stream.generate(Math::random)
- * .limit(5)
- * .forEach(System.out::println)
- * <p>
- * public boolean isPrime(int candidate) {
- * return IntStream.range(2, candidate)
- * .noneMatch(i -> candidate % i == 0);
- * }
- */
-
-/**
- Fibonacci
- Stream.iterate(new int[]{0, 1},
- t -> new int[]{t[1],t[0] + t[1]})
- .limit(10)
- .map(t -> t[0])
- .forEach(System.out::println);
- */
-
