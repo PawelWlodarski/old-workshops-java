@@ -1,15 +1,11 @@
-package jug.lodz.workshop.javafp.functions.answers;
+package jug.lodz.workshop.javafp.functions.exercises;
 
 import javaslang.Tuple;
 import javaslang.Tuple2;
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.function.Function;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -34,7 +30,7 @@ public class FunctionsPart2FunctionAsValueExercises {
     private Collection<Integer> specificMap(Collection<String> c, Function<String,Integer> f){
         Collection<Integer> result=new ArrayList<>(); //keep this in exercises
         for (String element : c) {
-            result.add(f.apply(element));
+            //???
         }
         return result;
     }
@@ -51,14 +47,40 @@ public class FunctionsPart2FunctionAsValueExercises {
     private Collection<String> specificFilter(Collection<String> c, Function<String,Boolean> f){
         Collection<String> result=new ArrayList<>(); //keep this in exercises
         for (String element : c) {
-            if(f.apply(element))
-                result.add(element);
+            //????
         }
         return result;
     }
 
+    @Test
+    public void testNewMapFunctionality() throws Exception {
+        Map<String,Integer> map=new HashMap<>();
+        map.put("present",1);
 
-    //Funcion<Function
+        Function<String,Integer> computeNewValue=null; //?????
+
+        map.computeIfAbsent("ten",computeNewValue);
+        map.computeIfAbsent("one_hundred",computeNewValue);
+
+        assertThat(map)
+                .containsEntry("present",1)
+                .containsEntry("ten",10)
+                .containsEntry("one_hundred",0);
+
+    }
+
+
+    @Test
+    public void practiceFunctionReceivingFunction() throws Exception {
+        Function<Function<Integer,Integer>,Integer> executeWithTwo=null; //???
+        Function<Function<Integer,Integer>,String> reportExecution=null; //???
+
+
+        assertThat(executeWithTwo.apply(x->x*5)).isEqualTo(10);
+        assertThat(reportExecution.apply(x->x*5)).isEqualTo("RESULT : 10");
+
+
+    }
 
     //LEVEL2
 
@@ -85,53 +107,36 @@ public class FunctionsPart2FunctionAsValueExercises {
     }
 
     private <A,B> Collection<B> genericMap(Collection<A> input, Function<A,B> f){
-        Collection<B> result=new ArrayList<>();
-        for (A elem : input) {
-            result.add(f.apply(elem));
-        }
-
-        return result;
+       return null;
     }
 
 
-    @Test
-    public void testGenericFilter() throws Exception {
-        List<Tuple2<String, BigDecimal>> transactions = Arrays.asList(
-                Tuple.of("t1", new BigDecimal("20")),
-                Tuple.of("t2", new BigDecimal("30")),
-                Tuple.of("t1", new BigDecimal("60"))
-
-        );
-
-        Function<Tuple2<String,BigDecimal>,Boolean> t1s=t -> t._1.equals("t1");
-
-        Collection<Tuple2<String,BigDecimal>> result = genericFilter(transactions,t1s);
-
-        assertThat(result).containsExactly(
-                Tuple.of("t1", new BigDecimal("20")),
-                Tuple.of("t1", new BigDecimal("60"))
-        );
-
-    }
-
-    private <A> Collection<A> genericFilter(Collection<A> c, Function<A,Boolean> f){
-        Collection<A> result=new ArrayList<>(); //keep this in exercises
-        for (A element : c) {
-            if(f.apply(element))
-                result.add(element);
-        }
-        return result;
-    }
+    // REMOVE COMMENT AND COMPLETE CODE
+//    @Test
+//    public void testGenericFilter() throws Exception {
+//        List<Tuple2<String, BigDecimal>> transactions = Arrays.asList(
+//                Tuple.of("t1", new BigDecimal("20")),
+//                Tuple.of("t2", new BigDecimal("30")),
+//                Tuple.of("t1", new BigDecimal("60"))
+//
+//        );
+//
+//        Function<Tuple2<String,BigDecimal>,Boolean> t1s=t -> t._1.equals("t1");
+//
+//        Collection<Tuple2<String,BigDecimal>> result = genericFilter(transactions,t1s);
+//
+//        assertThat(result).containsExactly(
+//                Tuple.of("t1", new BigDecimal("20")),
+//                Tuple.of("t1", new BigDecimal("60"))
+//        );
+//
+//    }
+//
+//    private ??? genericFilter(Collection<???> c, Function<???,???> f){
+//       return null;
+//    }
 
 
-//filter
 
-
-//map
-
-    //cwiczenie na deklaracje wlasciwego typu przy funkcji, ktora przyjmuje funkcje
-    //reduce
-    //map reduce
-    //loan pattern
 
 }

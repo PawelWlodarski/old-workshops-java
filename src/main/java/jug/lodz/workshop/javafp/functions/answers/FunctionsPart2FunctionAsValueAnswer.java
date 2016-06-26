@@ -2,10 +2,8 @@ package jug.lodz.workshop.javafp.functions.answers;
 
 import jug.lodz.workshop.Printer;
 
-import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -16,9 +14,9 @@ import static java.util.Arrays.asList;
 /**
  * Created by pawel on 20.06.16.
  */
-public class FunctionsPart2FunctionAsValue implements Printer{
+public class FunctionsPart2FunctionAsValueAnswer implements Printer{
 
-    private static FunctionsPart2FunctionAsValue lab=new FunctionsPart2FunctionAsValue();
+    private static FunctionsPart2FunctionAsValueAnswer lab=new FunctionsPart2FunctionAsValueAnswer();
 
     public static void main(String[] args) {
         lab.demo();
