@@ -8,14 +8,14 @@ import java.util.function.*;
 /**
  * Created by pawel on 19.06.16.
  */
-public class FunctionPart3Interfaces implements Printer{
+public class FunctionPart3InterfacesAnswer implements Printer{
 
     /**
      * ALL INTERFACES :
      * https://docs.oracle.com/javase/8/docs/api/java/util/function/package-summary.html
      */
 
-    private static FunctionPart3Interfaces lab=new FunctionPart3Interfaces();
+    private static FunctionPart3InterfacesAnswer lab=new FunctionPart3InterfacesAnswer();
 
     public static void main(String[] args) {
         lab.demo();
