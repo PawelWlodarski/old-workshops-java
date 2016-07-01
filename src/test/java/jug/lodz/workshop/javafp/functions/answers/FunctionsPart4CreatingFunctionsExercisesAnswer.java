@@ -2,7 +2,6 @@ package jug.lodz.workshop.javafp.functions.answers;
 
 import javaslang.Tuple;
 import javaslang.Tuple2;
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import java.util.HashMap;
