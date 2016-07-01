@@ -24,6 +24,9 @@ public class FunctionsPart1Definition implements Printer{
 
         println("  +FUNCTIONS DEFINITION");
 
+        //Show anonymous class notation
+        //Show notation with brackets
+        //Show simplest notation
         Function<Integer,Integer> f= null; //CODE
 //        Function<Integer,Integer> f= i -> i+1;
 
