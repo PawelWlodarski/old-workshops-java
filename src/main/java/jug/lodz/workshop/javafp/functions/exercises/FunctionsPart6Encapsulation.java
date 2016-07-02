@@ -1,4 +1,4 @@
-package jug.lodz.workshop.javafp.functions.answers;
+package jug.lodz.workshop.javafp.functions.exercises;
 
 import jug.lodz.workshop.Printer;
 
