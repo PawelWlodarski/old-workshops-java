@@ -82,7 +82,7 @@ public class StreamsPart3CollectorsExercisesAnswers {
      *  2) use "maxBy" Collector
      */
     @Test
-    public void partionToDigitAndNotDigit() throws Exception {
+    public void collectNumeric() throws Exception {
         Optional<Integer> max = Stream.of("1", "a", "bbb", "20", "66", "lodz", "jug", "1000")
                 .filter(this::isNumeric)
                 .collect(mapping(Integer::parseInt,

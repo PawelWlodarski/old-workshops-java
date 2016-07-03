@@ -30,7 +30,7 @@ public class StreamsPart1IntroExercises {
     public void simpleMapping_JustAddOneToCreatedStream() throws Exception {
         List<Integer> start = Arrays.asList(1, 2, 3, 4, 5);
 
-        Stream<Integer> result = start.stream(); // add one
+        Stream<Integer> result = start.stream(); // add one to each value
 
         assertThat(result.collect(Collectors.toList())).containsExactly(2,3,4,5,6);
     }
@@ -41,7 +41,7 @@ public class StreamsPart1IntroExercises {
      */
     @Test
     public void singleFunctionObjectMapping_extractName() throws Exception {
-        Function<Product,String> getName=null; // complete this
+        Function<Product,String> getName=null; // complete this, Product class is definied at the bottom of this file
 
         Stream<String> names = products().map(getName);
 
@@ -88,7 +88,7 @@ public class StreamsPart1IntroExercises {
      * 1) write each name to mutable list "names"
      */
     @Test
-    public void rewritewithForeach() throws Exception {
+    public void rewriteWithForeach() throws Exception {
         List<String> names=new LinkedList<>();
 
         products().forEach(null); // write to names

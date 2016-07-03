@@ -25,21 +25,21 @@ public class StreamsPart1Intro implements Printer {
     private void demo() {
         println("STREAM CREATION : FROM COLLECTION");
         println("  * EXAMPLE1 foreach on  pure list");
-        Arrays.asList(1,2,3,4,5).forEach(e->print(e+","));
+        Arrays.asList(1,2,3,4,5).forEach(e->print(e+",")); // not a stream yet, working without loops
 
         //transformation and termination
         println("\n\n  * EXAMPLE2 stream with mapping");
-        Arrays.asList(1,2,3,4,5).stream();
+        Arrays.asList(1,2,3,4,5).stream();   //show default method
         //CK
 //                .map(e->e+1)
 //                .forEach(e->print(e+","));
 
         println("\n\n  * EXAMPLE3 : stream with collector - joinig ");
-        Arrays.asList(1, 2, 3, 4, 5).stream();
+        Arrays.asList(1, 2, 3, 4, 5).stream();  // change of types
         //CK
 //                .map(e -> e + 1)
 //                .map(e -> e.toString())
-//                .collect(Collectors.joining(","));
+//                .collect(Collectors.joining(","));  //join on _,_ to make it more visible
 
 //        print(result);
 
@@ -50,7 +50,7 @@ public class StreamsPart1Intro implements Printer {
 
         Stream<String> step1 = Arrays.asList("1", "2", "3", "4", "5").stream();
         //CK
-//        Stream<Integer> step2 = step1.map(parseInt);
+//        Stream<Integer> step2 = step1.map(parseInt);  //type changed
 //        Stream<Integer> step3 = step2.map(square);
 //
 //        step3.map(e->e+" ").forEach(this::print);

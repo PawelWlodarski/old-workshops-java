@@ -36,7 +36,7 @@ public class StreamsPart3Collectors implements Printer{
         println("   * some set : "+someSet+", class : "+someSet.getClass());
         println("   * linked list : "+linkedList+", class : "+linkedList.getClass());
 
-        //CODE
+        //CODE - collectors composition
 //        List<String> mapped = Stream.of(1, 2, 2, 3).collect(mapping(i -> i.toString()+"str", toList()));
 //        println("   * mapped : "+mapped+", class : "+mapped.getClass());
 
@@ -93,7 +93,7 @@ public class StreamsPart3Collectors implements Printer{
 
         println("   * grouped : "+grouped);
 
-        //misleadign error when there is wrong result type
+        //EXAMPLE WHEN WANT MAPPING IN COLLECTORS
         Map<NumberSize, String> groupedCountedAndMapped = Stream.of(1, 20000, 3, 400, 5, 6000, 700,9000,10000).collect(
                 groupingBy(i -> {
                             if (i > 1000) return NumberSize.BIG;

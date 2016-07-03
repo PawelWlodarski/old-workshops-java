@@ -113,7 +113,6 @@ public class StreamsPart2DataTransformationAndQueriesExercises {
     public void findTransactionWithBiggestAmount() throws Exception {
         Optional<Transactions.FlatTransaction> maxTransaction = null;
 //        readTransactions()
-//                .skip(???)
 //                .max(???);   //Comparator.comparing(???)
 
 

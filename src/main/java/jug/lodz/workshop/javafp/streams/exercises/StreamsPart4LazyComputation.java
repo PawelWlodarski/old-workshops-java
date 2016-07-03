@@ -69,7 +69,7 @@ public class StreamsPart4LazyComputation implements Printer {
 //                .map(squareWithLogging);
 
 
-        println("\n * SHORT CIRCUIT");
+        println("\n * SHORT CIRCUIT");   //infinite stream
 
         println("\ncalculating firts five squares");
 

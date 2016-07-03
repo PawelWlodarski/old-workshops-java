@@ -79,10 +79,10 @@ public class StreamsPart3CollectorsExercises {
     /**
      *  in collect method
      *  1) use "mapping" to map String into Integer
-     *  2) use "maxBy" Collector
+     *  2) use "maxBy" Collector which receives comparator ()
      */
     @Test
-    public void partionToDigitAndNotDigit() throws Exception {
+    public void collectNumeric() throws Exception {
         Optional<Integer> max = Stream.of("1", "a", "bbb", "20", "66", "lodz", "jug", "1000")
                 .filter(null)
                 .collect(mapping(null,
@@ -117,7 +117,6 @@ public class StreamsPart3CollectorsExercises {
     }
 
 
-     //partition by i grouping by
 
     /**
      *  1) partition by t.amount [0-150;150-]

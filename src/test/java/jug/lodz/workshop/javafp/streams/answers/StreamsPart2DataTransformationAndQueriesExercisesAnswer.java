@@ -109,7 +109,6 @@ public class StreamsPart2DataTransformationAndQueriesExercisesAnswer {
      */
     public void findTransactionWithBiggestAmount() throws Exception {
         Optional<Transactions.FlatTransaction> maxTransaction = readTransactions()
-                .skip(1)
                 .max(Comparator.comparing(t -> t.amount));
 
 

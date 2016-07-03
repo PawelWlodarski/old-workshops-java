@@ -29,13 +29,13 @@ public class StreamsPart2DataTransformationAndQueries implements Printer {
 
         println("\n * SKIP HEADER AND DISPLAY THREE FIRST RECORDS");
 
-        Transactions.transactions.stream()
+        Transactions.transactions.stream()  // run bare version to check results
 //                .skip(1)  // KATA
 //                .limit(3)
                 .forEach(this::println);
 
         println("\n * CONVERT TO DOMAIN OBJECTS");
-//        readTransactions().forEach(this::println);  // enter readTransactions
+//        readTransactions().forEach(this::println);  // enter readTransactions defined at the bottom
 
 
         println("\n * ANY MATCH & ALL MATCH");
@@ -115,6 +115,6 @@ public class StreamsPart2DataTransformationAndQueries implements Printer {
 //                .filter(cels->cels.length==5) // KATA
 //                .filter(cels->!cels[0].equals("aaa") && !cels[1].equals("bbb")) // KATA
 //                .filter(cels->!cels[0].isEmpty())  // KATA
-                .map(Transactions.FlatTransaction::new);
+                .map(Transactions.FlatTransaction::new);   //domain object created
     }
 }
