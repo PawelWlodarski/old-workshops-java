@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.function.BiFunction;
+import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -82,6 +83,28 @@ public class FunctionsPart4CreatingFunctionsExercises {
         assertThat(greaterThanCurrying.apply(50).test(49)).isFalse();
 
     }
+
+    @Test
+    public void testCurry() throws Exception {
+        BinaryOperator<Integer> add=(i1, i2)->i1+i2;
+
+        Function<Integer, Function<Integer, Integer>> curried = curry(add);
+
+        assertThat(curried.apply(1).apply(2)).isEqualTo(3);
+    }
+
+    private <A,B,C> Function<A,Function<B,C>> curry(BiFunction<A,B,C> f){return null;}
+
+    @Test
+    public void testUncurry() throws Exception {
+        Function<Integer, Function<Integer, Integer>> f=i1->i2->i1+i2;
+
+        BiFunction<Integer, Integer, Integer> uncurried = unCurry(f);
+
+        assertThat(uncurried.apply(1,2)).isEqualTo(3);
+    }
+
+    private <A,B,C> BiFunction<A,B,C>  unCurry(Function<A,Function<B,C>> f){return null;}
 
     //LEVEL 3 - HARD
 

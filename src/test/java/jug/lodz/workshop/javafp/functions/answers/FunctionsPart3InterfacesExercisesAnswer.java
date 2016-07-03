@@ -90,7 +90,7 @@ public class FunctionsPart3InterfacesExercisesAnswer {
     }
 
 
-    //LEVEL3 - default method
+    //LEVEL3
 
 
     @Test

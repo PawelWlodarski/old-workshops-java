@@ -1,5 +1,7 @@
 package jug.lodz.workshop.javafp.functions.exercises;
 
+import javaslang.Tuple;
+import javaslang.Tuple2;
 import jug.lodz.workshop.Printer;
 
 import java.nio.file.Files;
@@ -61,6 +63,13 @@ public class FunctionsPart2FunctionAsValue implements Printer{
         println("    * applying 1 : "+ff.apply(x->1));
         println("    * applying x : "+ff.apply(x->x));
         println("    * applying x*x : "+ff.apply(x->x*x));
+
+        println(" * TUPLES");
+
+        Tuple2<String, Integer> t = Tuple.of("1  ", 2);
+        println("    * original : "+t);
+        println("    * map first : "+t.map1(s->Integer.parseInt(s.trim())));
+        println("    * map second : "+t.map2(i->i+1));
 
 
         println(" * !!!LOAN PATTERN!!!");

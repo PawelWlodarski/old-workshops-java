@@ -46,6 +46,8 @@ public class FunctionPart3InterfacesAnswer implements Printer{
 
         println("    * Add Binary Operator of (7,4): "+addBi.apply(7,4));
 
+        //BIFUNCTION ON TUPLES
+
         println(" * PREDICATES");
 
         Function<Integer,Boolean> isPositive=i->i>0;
@@ -122,6 +124,7 @@ public class FunctionPart3InterfacesAnswer implements Printer{
         println("    * Custom interface :  "+addThree.apply(1,2,3));
     }
 
+    @FunctionalInterface
     interface ThreeIntegers {
         Integer apply(Integer a,Integer b, Integer c);
     }
