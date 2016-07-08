@@ -7,6 +7,7 @@ import jug.lodz.workshop.Printer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Collection;
+import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Stream;
@@ -27,7 +28,7 @@ public class FunctionsPart2FunctionAsValue implements Printer{
     private  void demo(){
         println("\n\n FUNCTIONS AS VALUE \n");
 
-        println(" * MODULARISATION");
+        println(" * DRY & MODULARISATION");
         // Repeatition, functions defined at the bottom of this file
         Integer sum = sum(0, asList(1, 2, 3, 4, 5));
         Integer multiply = multiply(1, asList(1, 2, 3, 4, 5));
@@ -51,20 +52,28 @@ public class FunctionsPart2FunctionAsValue implements Printer{
 
         // BIFUNCTION for the first time!!! More in part 3
         //example of some lib function which joins strings
-        BiFunction<String,Integer,String> libFunction=(s,i)-> "".equals(s)? "Library : "+i : s+","+i;
-        String joinedLib = reduceGeneric("", asList(1, 2, 3, 4, 5), libFunction);
+        BiFunction<String,Integer,String> libFunction=(s,i)-> s+" : "+i;
+        String joinedLib = reduceGeneric("Library", asList(1, 2, 3, 4, 5), libFunction);
 
         println("    * joined lib : "+joinedLib);
 
 
         println(" * FUNCTION RECEIVING FUNCTION");
+        List<Integer> ints = asList(1, 2, 3, 4, 5);
+        Function<BiFunction<Integer,Integer,Integer>,
+                Integer> reducef=
+                        f->reduce(0,ints,f);
+
+        println("    * a function receive a function to reduce with Integer::sum : "+reducef.apply(Integer::sum));
+//        println("    * function receive function to reduce with String joining : "+reducef.apply(libFunction)); // functions can not have generics
+
         Function<Function<Integer,Integer>,Integer> ff=f1->f1.apply(1);
 
         println("    * applying 1 : "+ff.apply(x->1));
         println("    * applying x : "+ff.apply(x->x));
         println("    * applying x*x : "+ff.apply(x->x*x));
 
-        println(" * TUPLES");
+        println(" * TUPLES RECEIVING FUNCTIONS");
 
         Tuple2<String, Integer> t = Tuple.of("1  ", 2);
         println("    * original : "+t);
