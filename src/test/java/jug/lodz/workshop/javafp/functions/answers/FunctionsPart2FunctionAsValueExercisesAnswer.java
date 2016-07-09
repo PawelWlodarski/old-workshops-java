@@ -55,18 +55,20 @@ public class FunctionsPart2FunctionAsValueExercisesAnswer {
 
     @Test
     public void testNewMapFunctionality() throws Exception {
-        Map<String,Integer> map=new HashMap<>();
-        map.put("present",1);
+        Map<String,Integer> cache=new HashMap<>();
+        cache.put("2",8);
 
-        Function<String,Integer> computeNewValue=s-> s=="ten"?10:0;
+        Function<String,Integer> parseInt=Integer::parseInt;
 
-        map.computeIfAbsent("ten",computeNewValue);
-        map.computeIfAbsent("one_hundred",computeNewValue);
+        Function<String, Integer> computeNewValue = parseInt.andThen(i -> i * i * i);
 
-        assertThat(map)
-                .containsEntry("present",1)
-                .containsEntry("ten",10)
-                .containsEntry("one_hundred",0);
+        cache.computeIfAbsent("3",computeNewValue);
+        cache.computeIfAbsent("4",computeNewValue);
+
+        assertThat(cache)
+                .containsEntry("2",8)
+                .containsEntry("3",27)
+                .containsEntry("4",64);
 
     }
 

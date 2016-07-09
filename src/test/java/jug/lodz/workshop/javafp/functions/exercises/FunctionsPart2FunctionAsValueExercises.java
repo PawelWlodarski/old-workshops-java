@@ -54,18 +54,20 @@ public class FunctionsPart2FunctionAsValueExercises {
 
     @Test
     public void testNewMapFunctionality() throws Exception {
-        Map<String,Integer> map=new HashMap<>();
-        map.put("present",1);
+        Map<String,Integer> cache=new HashMap<>();
+        cache.put("2",8);
 
-        Function<String,Integer> computeNewValue=null; //?????
+        Function<String,Integer> parseInt=null;
 
-        map.computeIfAbsent("ten",computeNewValue);
-        map.computeIfAbsent("one_hundred",computeNewValue);
+        Function<String, Integer> computeNewValue = parseInt.andThen(null);  //f(x) = x ^ 3
 
-        assertThat(map)
-                .containsEntry("present",1)
-                .containsEntry("ten",10)
-                .containsEntry("one_hundred",0);
+        cache.computeIfAbsent("3",computeNewValue);
+        cache.computeIfAbsent("4",computeNewValue);
+
+        assertThat(cache)
+                .containsEntry("2",8)
+                .containsEntry("3",27)
+                .containsEntry("4",64);
 
     }
 
@@ -75,9 +77,14 @@ public class FunctionsPart2FunctionAsValueExercises {
         Function<Function<Integer,Integer>,Integer> executeWithTwo=null; //???
         Function<Function<Integer,Integer>,String> reportExecution=null; //???
 
+        // implement execute with two so the result of result2(x->x*5) is 10
+        Integer result1 = executeWithTwo.apply(x -> x * 5);
 
-        assertThat(executeWithTwo.apply(x->x*5)).isEqualTo(10);
-        assertThat(reportExecution.apply(x->x*5)).isEqualTo("RESULT : 10");
+        //implement report execution so that apply(x->x*5) is "RESULT : 10"
+        String result2 = reportExecution.apply(x -> x * 5);
+
+        assertThat(result1).isEqualTo(10);
+        assertThat(result2).isEqualTo("RESULT : 10");
 
 
     }
