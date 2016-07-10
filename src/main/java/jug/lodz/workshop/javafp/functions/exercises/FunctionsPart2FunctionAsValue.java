@@ -51,7 +51,7 @@ public class FunctionsPart2FunctionAsValue implements Printer{
 
 
         // BIFUNCTION for the first time!!! More in part 3
-        //example of some lib function which joins strings
+        //this maybe some lib function which joins strings
         BiFunction<String,Integer,String> libFunction=(s,i)-> s+" : "+i;
         String joinedLib = reduceGeneric("Library", asList(1, 2, 3, 4, 5), libFunction);
 
@@ -59,6 +59,8 @@ public class FunctionsPart2FunctionAsValue implements Printer{
 
 
         println(" * FUNCTION RECEIVING FUNCTION");
+        //write simple example during workshop
+
         List<Integer> ints = asList(1, 2, 3, 4, 5);
         Function<BiFunction<Integer,Integer,Integer>,
                 Integer> reducef=
@@ -67,7 +69,8 @@ public class FunctionsPart2FunctionAsValue implements Printer{
         println("    * a function receive a function to reduce with Integer::sum : "+reducef.apply(Integer::sum));
 //        println("    * function receive function to reduce with String joining : "+reducef.apply(libFunction)); // functions can not have generics
 
-        Function<Function<Integer,Integer>,Integer> ff=f1->f1.apply(1);
+        //just a syntax exercise
+        Function<Function<Integer,Integer>,Integer> ff=f1->f1.apply(2);
 
         println("    * applying 1 : "+ff.apply(x->1));
         println("    * applying x : "+ff.apply(x->x));

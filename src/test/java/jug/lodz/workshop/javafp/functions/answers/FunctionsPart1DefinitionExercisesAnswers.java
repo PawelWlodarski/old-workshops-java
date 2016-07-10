@@ -104,7 +104,10 @@ public class FunctionsPart1DefinitionExercisesAnswers {
      * @return
      */
     private Function<String,Double> andThen(Function<String,Integer> f1,Function<Integer,Double> f2){
-        return f1.andThen(f2);
+            return s->{
+                Integer r1=f1.apply(s);
+                return f2.apply(r1);
+            };
     }
 
 
@@ -136,7 +139,10 @@ public class FunctionsPart1DefinitionExercisesAnswers {
      */
     // define in comments Function<???,???> f1, Function<???,???> f2
     private <A,B,C> Function<A,C> andThenGeneric(Function<A,B> f1, Function<B,C> f2){
-        return f1.andThen(f2);
+        return (A s)->{
+            B r1=f1.apply(s);
+            return f2.apply(r1);
+        };
     }
 
 

@@ -28,17 +28,19 @@ public class FunctionPart3Interfaces implements Printer{
 
         Function<String,Integer> parse=s->Integer.parseInt(s);
 //CODE - Two arguments function
+        BiFunction<String,Integer,Integer> parseAdd = (s,i) -> Integer.parseInt(s) + i;
+
 //        BiFunction<String,Integer,Integer> parseAdd= (s,i) -> Integer.parseInt(s) + i;
-//        println("    * BiFunction Result : "+parseAdd.apply("3",2));
+        println("    * BiFunction Result : "+parseAdd.apply("3",2));
 
         println(" * OPERATORS");
 
         Function<Integer,Integer> negate=i->-i;
 
 //CODE - SINGLE ARGUMENT, SPECIALIZED FUNCTION
-//        UnaryOperator<Integer> negateUnary=i->-i;
+        UnaryOperator<Integer> negateUnary=i->-i;
 // EXPLAIN, SHOW IMPLEMENTATION
-//        negate=negateUnary;   // Hierarchy
+        negate=negateUnary;   // Hierarchy
 
 //        println("    * Negate Unary Operator of 7: "+negateUnary.apply(7));
 
@@ -58,9 +60,11 @@ public class FunctionPart3Interfaces implements Printer{
         println("    * bi predicate (are 3 and 4 equals) : "+equals.test(3,4));
 
 // CODE - COMBINE PREDICATES
+        Predicate<Integer> isPositiveEven = isPositivePredicate.and(i -> i % 2 == 0);
+
 //        Predicate<Integer> isPositiveAndEven = isPositivePredicate.and(i -> i % 2 == 0);
-//        println("    * combined predicate (is 7 positive and even) : "+isPositiveAndEven.test(7));
-//        println("    * combined predicate (is 8 positive and even) : "+isPositiveAndEven.test(8));
+        println("    * combined predicate (is 7 positive and even) : "+isPositiveEven.test(7));
+        println("    * combined predicate (is 8 positive and even) : "+isPositiveEven.test(8));
 
         println(" * FUNCTIONS WITH EFFECTS");
 
@@ -78,7 +82,7 @@ public class FunctionPart3Interfaces implements Printer{
 //        println("    * supplier : "+newStringBuilder.get().append("string buffer ").append("created by supplier"));
 
 
-        println("   * (BONUS) LAZINESS");
+        println(" * (BONUS) LAZINESS");
 
         Supplier<Integer> parseLater=()->Integer.parseInt("aaa");
 //CODE - add get()

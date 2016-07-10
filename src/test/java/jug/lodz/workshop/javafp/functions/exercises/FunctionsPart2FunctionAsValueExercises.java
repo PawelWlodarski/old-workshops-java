@@ -74,8 +74,8 @@ public class FunctionsPart2FunctionAsValueExercises {
 
     @Test
     public void practiceFunctionReceivingFunction() throws Exception {
-        Function<Function<Integer,Integer>,Integer> executeWithTwo=null; //???
-        Function<Function<Integer,Integer>,String> reportExecution=null; //???
+        Function<Function<Integer,Integer>,Integer> executeWithTwo=null; //???  call function.apply(2)
+        Function<Function<Integer,Integer>,String> reportExecution=null; //???  call function.apply(2) and construct String
 
         // implement execute with two so the result of result2(x->x*5) is 10
         Integer result1 = executeWithTwo.apply(x -> x * 5);

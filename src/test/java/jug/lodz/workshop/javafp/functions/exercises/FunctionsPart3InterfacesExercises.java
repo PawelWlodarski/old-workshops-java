@@ -46,21 +46,18 @@ public class FunctionsPart3InterfacesExercises {
 
         Predicate<Integer> notRetired = null;  //use negate()
 
-        Predicate<Integer> hasDiscount=null;  //???.and(???).negate()
+        Predicate<Integer> hasDiscount=null;  //???.and(???).negate()  // is not adult or is retired
 
         assertThat(hasDiscount.test(15)).isTrue();
         assertThat(hasDiscount.test(20)).isFalse();
         assertThat(hasDiscount.test(60)).isFalse();
         assertThat(hasDiscount.test(70)).isTrue();
-
-
-
     }
 
 
     //LEVEL2
 
-//    interface TriFunction<???>{
+//    interface TriFunction<???>{   // 4 different generics needed - each argument can have different type
 //        ??? apply(???);
 //    }
 //

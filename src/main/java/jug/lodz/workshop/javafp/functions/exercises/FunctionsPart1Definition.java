@@ -24,9 +24,6 @@ public class FunctionsPart1Definition implements Printer{
 
         println("  +FUNCTIONS DEFINITION");
 
-        //Show anonymous class notation
-        //Show notation with brackets
-        //Show simplest notation
         Function<Integer,Integer> f= null; //CODE
 //        Function<Integer,Integer> f= i -> i+1;
 
@@ -34,13 +31,20 @@ public class FunctionsPart1Definition implements Printer{
         println("    * apply f to 2 : "+f.apply(2));
         println("    * apply f to 3 : "+f.apply(3));
 
-        Function<String,Integer> parseStringLong=new Function<String, Integer>() {
+        //Show anonymous class notation
+        //Show notation with brackets
+        //Show simplest notation
+
+
+        //ANOTHER EXAMPLE FOR PRACTICE - DIFFERENT TYPES
+        Function<String,Integer> parseStringLongest=new Function<String, Integer>() {
             @Override
             public Integer apply(String s) {
                 return Integer.parseInt(s);
             }
         };
 
+        //medium signature - no anonymous class
         Function<String,Integer> parseStringMedium= (String s1)->{
             int parsed = Integer.parseInt(s1);
             return parsed;
@@ -51,7 +55,7 @@ public class FunctionsPart1Definition implements Printer{
         //* make one-liner
         //* remove return and bracers
 
-        Function<String,Integer> parseString= parseStringLong; //CODE
+        Function<String,Integer> parseString= parseStringLongest; //CODE
 //        Function<String,Integer> parseString= s1->Integer.parseInt(s1);
 
         println("  +FUNCTIONS COMPOSITION");
@@ -68,6 +72,7 @@ public class FunctionsPart1Definition implements Printer{
 
 
 
+        //show map1 & map2 - function as a value will be described in the next section
         println("  +TUPLES");
         Tuple1<String> t1 = Tuple.of("value");
         Tuple2<String, Integer> t2 = Tuple.of("value", 2);
