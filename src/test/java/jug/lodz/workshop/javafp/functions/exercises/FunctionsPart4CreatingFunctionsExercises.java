@@ -59,7 +59,7 @@ public class FunctionsPart4CreatingFunctionsExercises {
 
     @Test
     public void testCurrying() throws Exception {
-        Function<Integer,Function<Integer,Integer>> returnGreater=null;
+        Function<Integer,Function<Integer,Integer>> returnGreater=null;    // if a>b then a else b
 
         assertThat(returnGreater.apply(7).apply(5)).isEqualTo(7);
         assertThat(returnGreater.apply(7).apply(13)).isEqualTo(13);
