@@ -25,10 +25,12 @@ public class StreamsPart3Collectors implements Printer{
     private void demo(){
         print("\n\nSTREAM COLLECTORS\n\n");
 
-        println("\n * To COLLECTIONS");
+        println("\n *** SECTION : COLLECT TO COLLECTIONS ***");
 
         List<Integer> someList = Stream.of(1, 2, 2, 3).collect(toList());
         Set<Integer> someSet = Stream.of(1, 2, 2, 3).collect(Collectors.toSet());
+
+        //custom collection
         LinkedList<Integer> linkedList = Stream.of(1, 2, 2, 3).collect(Collectors.toCollection(LinkedList::new));
 
 
@@ -41,19 +43,21 @@ public class StreamsPart3Collectors implements Printer{
 //        println("   * mapped : "+mapped+", class : "+mapped.getClass());
 
 
-        println("\n * JOINING STRING");
+        println("\n *** SECTION :  JOINING STRING ***");
 
-        //CODE
+        //CODE - simple join
 //        String joined = Stream.of(1, 2, 3, 4, 5)
 //                .map(i -> i.toString()).collect(joining(","));
 //
 //        println("   * numbers joined : "+joined);
 
+        //composition -> mapping & joining
         String collectorsComposed = Stream.of(1, 2, 3, 4, 5)
                 .map(i -> i.toString()).collect(mapping(i->i.toString(), joining(",")));
 
         println("   * collectors composed : "+collectorsComposed);
 
+        // with prefix and suffix
         String withPrefixAndSuffix = Stream.of(1, 2, 3, 4, 5)
                 .map(i -> i.toString()).collect(joining(",","{","}"));
 
@@ -61,20 +65,22 @@ public class StreamsPart3Collectors implements Printer{
 
         //integer statistics
 
+        println("\n *** SECTION :  STATISTICS ***");
+
         //CODE
 //        Long count = Stream.of("aaa", "bbbb", "ccccccc").collect(Collectors.counting());
 //        Integer sum = Stream.of("aaa", "bbbb", "ccccccc").collect(Collectors.summingInt(w -> w.length()));
         IntSummaryStatistics statistics = Stream.of("aaa", "bbbb", "ccccccc").collect(Collectors.summarizingInt(String::length));
 
-        println("\n * STATISTICS");
 
         //CODE
 //        println("   * count : "+count);
 //        println("   * sum : "+sum);
         println("   * statistics : "+statistics);
 
-        println("\n * GROUPING");
+        println("\n *** SECTION :  GROUPING ***");
 
+        // PARTITION - two sets {true|false}
         Map<Boolean, List<Tuple2<Integer, String>>> partitioned = Stream.of(
                 Tuple.of(1, "aa"),
                 Tuple.of(2, "bb"),
@@ -89,11 +95,11 @@ public class StreamsPart3Collectors implements Printer{
             if (i > 1000) return NumberSize.BIG;
             else if (i > 100) return NumberSize.MEDIUM;
             else return NumberSize.SMALL;
-        }));  // CAN BE EXTERNAL LAMBDA
+        }));  // CAN/SHOULD BE EXTERNAL LAMBDA
 
         println("   * grouped : "+grouped);
 
-        //EXAMPLE WHEN WANT MAPPING IN COLLECTORS
+        //EXAMPLE WHEN WE WANT MAPPING IN COLLECTORS AND NOT STREAMS
         Map<NumberSize, String> groupedCountedAndMapped = Stream.of(1, 20000, 3, 400, 5, 6000, 700,9000,10000).collect(
                 groupingBy(i -> {
                             if (i > 1000) return NumberSize.BIG;

@@ -23,7 +23,7 @@ public class StreamsPart4LazyComputation implements Printer {
     private void demo() {
         print("\n\nLAZY STREAMS\n\n");
 
-        println("\n * LAZY NATURE");
+        println("\n *** SECTION :  LAZY COMPUTATION ***");
 
 
         Predicate<Integer> greaterThanThreeWithLogging = i -> {
@@ -38,7 +38,7 @@ public class StreamsPart4LazyComputation implements Printer {
 
         println("\ncalculating result : 1) filter 2) map");
 
-        //CODE
+        //CODE - SOME MAP INVOCATIONS ARE UNNECESSARY
 //        List<Integer> resultFilterMap = Stream.of(1, 2, 3, 4, 5)
 //                .filter(greaterThanThreeWithLogging)
 //                .map(squareWithLogging).collect(Collectors.toList());
@@ -50,7 +50,7 @@ public class StreamsPart4LazyComputation implements Printer {
         println("\n\ncalculating result : 1) map 2) filter");
 
 
-        //CODE
+        //CODE - ALL MAP INVOCATIONS ARE NECESSARY
 //        List<Integer> resultMapFilter = Stream.of(1, 2, 3, 4, 5)
 //                .map(squareWithLogging)
 //                .filter(greaterThanThreeWithLogging)
@@ -59,8 +59,9 @@ public class StreamsPart4LazyComputation implements Printer {
 //        println("  *  calculated result map: filter " + resultMapFilter);
 
 
-        println("\n * EAGER EXAMPLE");
+        println("\n *** SECTION :  EAGER EXAMPLE ***");
 
+        //USING JAVASLANG
         println("\ncalculating eager example : 1) filter 2) map");
 
         //CODE
@@ -69,9 +70,10 @@ public class StreamsPart4LazyComputation implements Printer {
 //                .map(squareWithLogging);
 
 
-        println("\n * SHORT CIRCUIT");   //infinite stream
+        println("\n *** SECTION : INFINITE STREAMS ***");
 
-        println("\ncalculating firts five squares");
+        //short circuit
+        println("\ncalculating first five squares");
 
         //CODE
 //        List<Integer> firstFiveSquares = Stream
@@ -83,7 +85,7 @@ public class StreamsPart4LazyComputation implements Printer {
 //        println("  *  calculated first five squares " + firstFiveSquares);
 
 
-        println("\n * PEEK");
+        println("\n *** PEEK ***");
 
         //CODE
 //        Stream

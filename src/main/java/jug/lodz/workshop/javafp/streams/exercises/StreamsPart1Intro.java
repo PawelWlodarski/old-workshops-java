@@ -20,15 +20,13 @@ public class StreamsPart1Intro implements Printer {
     }
 
 
-
-
     private void demo() {
-        println("STREAM CREATION : FROM COLLECTION");
-        println("  * EXAMPLE1 foreach on  pure list");
+        println("STREAM CREATION : FROM COLLECTION\n");
+        println("  * EXAMPLE1 -  Internal loop / External loop - foreach on  pure list");
         Arrays.asList(1,2,3,4,5).forEach(e->print(e+",")); // not a stream yet, working without loops
 
         //transformation and termination
-        println("\n\n  * EXAMPLE2 stream with mapping");
+        println("\n\n  * EXAMPLE2 stream and mapping");
         Arrays.asList(1,2,3,4,5).stream();   //show default method
         //CK
 //                .map(e->e+1)
@@ -45,9 +43,11 @@ public class StreamsPart1Intro implements Printer {
 
         println("\n\n  * EXAMPLE4 : mapping stream content with external functions");
 
+        //separate definition (functions) from execution (streams)
         Function<String, Integer> parseInt = Integer::parseInt;
         Function<Integer,Integer> square=i->i*i;
 
+        //show changing types
         Stream<String> step1 = Arrays.asList("1", "2", "3", "4", "5").stream();
         //CK
 //        Stream<Integer> step2 = step1.map(parseInt);  //type changed
@@ -55,8 +55,9 @@ public class StreamsPart1Intro implements Printer {
 //
 //        step3.map(e->e+" ").forEach(this::print);
 
-        println("\n\n  * EXAMPLE4b : something very powerful");
+        println("\n\n  * EXAMPLE4b : Associativity law");
 
+        //this is working only when map is pure!
         Function<String, String> composed = parseInt.andThen(square).andThen(e->e+" ");
 
         Stream<String> step1b = Arrays.asList("1", "2", "3", "4", "5").stream(); //why do we need to define stream1 once again?
@@ -64,7 +65,7 @@ public class StreamsPart1Intro implements Printer {
 
 
         //termination
-        println("\n\n  * EXAMPLE5 : Reduce");
+        println("\n\n  * EXAMPLE5 : Reduce to single value");
         //CK
 //        Integer sum1 = Arrays.asList(1, 2, 3, 4, 5).stream().reduce(0, (e1, e2) -> e1 + e2);
 //        Integer sum2 = Arrays.asList(1, 2, 3, 4, 5).stream().reduce(0, Integer::sum);

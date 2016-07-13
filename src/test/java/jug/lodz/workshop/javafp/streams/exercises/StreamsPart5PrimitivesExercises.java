@@ -15,6 +15,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class StreamsPart5PrimitivesExercises {
 
 
+    /**
+     *  don't change test - implement 'sum' methods
+     *
+     */
     @Test
     public void sumOfFirstNIntegers() throws Exception {
 
@@ -30,6 +34,10 @@ public class StreamsPart5PrimitivesExercises {
                 .sum();
     }
 
+    /**
+     *  don't change test - implement 'calculateIntegerSum' methods
+     *
+     */
     @Test
     public void findMaxInt() throws Exception {
         OptionalInt optionalMax = IntStream
@@ -40,13 +48,14 @@ public class StreamsPart5PrimitivesExercises {
 
     }
 
+
     @Test
     public void calculateIntegerSum() throws Exception {
         int sum = Stream.of(
                 new BigInteger("10"),
                 new BigInteger("20"),
                 new BigInteger("30")
-        ).mapToInt(null).hashCode();  // <- FIX BOTH
+        ).mapToInt(null).hashCode();  // <- FIX BOTH , change boxed type to int and then replace 'hashCode' method
 
         assertThat(sum).isEqualTo(60);
     }

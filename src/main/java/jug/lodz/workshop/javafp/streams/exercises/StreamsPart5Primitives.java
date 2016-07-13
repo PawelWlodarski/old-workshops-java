@@ -31,7 +31,7 @@ public class StreamsPart5Primitives implements Printer {
 
         print("\n\nPRIMITIVES\n\n");
 
-        println("\n * MEASURES");
+        println("\n *** SECTION :  MEASURES ***");
 
 //        start();
 
@@ -73,10 +73,12 @@ public class StreamsPart5Primitives implements Printer {
         UnaryOperator<Integer> boxedOperator=i->i+1;
         IntUnaryOperator primitiveOperator=i->i+1;
 
+        //strange 'Collector'
         ArrayList<Integer> primitivesCollected = IntStream.of(1, 2, 3, 4, 5, 6, 7, 8, 9)
                 .map(primitiveOperator)
                 .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
 
+        //moving between boxed and unboxed
         List<Integer> boxedCollected = IntStream.of(1, 2, 3, 4, 5, 6, 7, 8, 9)
                 .map(primitiveOperator)
 //                .map(boxedOperator)   //move boxed

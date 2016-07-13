@@ -17,12 +17,14 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class StreamsPart4LazyComputationExercises {
 
+    //DO THOSe EXERCISES TOGETHER
+
     @Test
     public void generate7RandomNumbers() throws Exception {
         List<Double> result = Stream
-                .<Double>generate(null)
+                .<Double>generate(null)    // Math.rand
                 .limit(7)
-                .collect(null);
+                .collect(null);       // we need a list
 
 //        System.out.println(result);
 
@@ -30,6 +32,9 @@ public class StreamsPart4LazyComputationExercises {
     }
 
 
+    /**
+     * don't modify test - implement 'isPrime' method
+     */
     @Test
     public void testIsPrime() throws Exception {
         assertThat(isPrime(7)).isTrue();

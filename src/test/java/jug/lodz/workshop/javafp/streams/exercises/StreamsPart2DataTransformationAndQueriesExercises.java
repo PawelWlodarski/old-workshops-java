@@ -42,7 +42,7 @@ public class StreamsPart2DataTransformationAndQueriesExercises {
      * 1)remove header
      * 2)parse string
      * 3)find min and max
-     * -- can you use only one stream
+     * -- can you use only one stream?
      */
     public void testMinAndMaksAmount() throws Exception {
         List<String> array = Arrays.asList("header", "7", "9", "2", "13", "5");
@@ -170,7 +170,7 @@ public class StreamsPart2DataTransformationAndQueriesExercises {
 
 
     /**
-     * Implement "parseTransaction" method
+     * don't change test - implement "parseTransaction" method
      */
     @Test
     public void parseTransactionsWithFlatMap() throws Exception {
@@ -186,7 +186,7 @@ public class StreamsPart2DataTransformationAndQueriesExercises {
                 .flatMap(this::parseTransaction);
     }
 
-    //EXERCISE
+    //EXERCISE - implement this method - return Stream.of(element) or Stream.empty()
     private Stream<Transactions.FlatTransaction> parseTransaction(String[] fields){
         try{
             return null;
@@ -200,7 +200,7 @@ public class StreamsPart2DataTransformationAndQueriesExercises {
 
     @Test
     /**
-     * Implement "customFilter"
+     * don't change test - Implement "customFilter"
      */
     public void testCustomFilter() throws Exception {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
@@ -210,11 +210,15 @@ public class StreamsPart2DataTransformationAndQueriesExercises {
         assertThat(customFilter(strings,s->s.length()>5)).containsExactly("dddddd");
     }
 
+    //EXERCISE - implement this method (use stream() or standard loop if you want)
     private <A> Collection<A> customFilter(Collection<A> c, Predicate<A> f){
         return null;
     }
 
     @Test
+    /**
+     * don't change this test - implement 'customSort' method
+     */
     public void testCustomSort() throws Exception {
         List<Integer> numbers = Arrays.asList(3,2,5,6,1,4);
         List<String> strings = Arrays.asList("ccccc", "bbbb", "aaa", "dddddd");
@@ -230,7 +234,7 @@ public class StreamsPart2DataTransformationAndQueriesExercises {
         assertThat(customSort(strings,lengthComparator)).containsExactly("aaa","bbbb","ccccc","dddddd");
 
     }
-
+    //EXERCISE
     private <A> Collection<A> customSort(Collection<A> col, Comparator<A> com){
         return null;
     }

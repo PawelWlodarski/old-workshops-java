@@ -35,7 +35,9 @@ public class StreamsPart2DataTransformationAndQueries implements Printer {
                 .forEach(this::println);
 
         println("\n * CONVERT TO DOMAIN OBJECTS");
-//        readTransactions().forEach(this::println);  // enter readTransactions defined at the bottom
+        // enter readTransactions defined at the bottom
+        // It uses csv simulation from Transactions.java
+//        readTransactions().forEach(this::println);
 
 
         println("\n * ANY MATCH & ALL MATCH");
@@ -63,7 +65,7 @@ public class StreamsPart2DataTransformationAndQueries implements Printer {
 
         println("\n * FIND DISTINCT ACCOUNTS");
 
-        println("  * only map");
+        println("  * only accountFrom");
 
 //        readTransactions()            //KATA
 //                .map(t->t.accountFrom)
@@ -71,16 +73,16 @@ public class StreamsPart2DataTransformationAndQueries implements Printer {
 //                .forEach(this::println);
 
 
-        println("  * all with flat map");
-        // show starnge "cyclic reference" error (remove i->)
+        println("  * concat accountFrom and accountTo");
 
-//        readTransactions()                //KATA
-//                .map(t->t.accountFrom)
-//                .flatMap(i->readTransactions()
-//                        .map(t->t.accountTo)
-//                )
-//                .distinct()
-//                .forEach(this::println);
+        Stream<Integer> streamFrom = readTransactions().map(t -> t.accountFrom);
+        Stream<Integer> streamTo = readTransactions().map(t -> t.accountTo);
+
+        Stream
+                .concat(streamFrom,streamTo)
+                .distinct()
+                .forEach(this::println);
+
 
         println("\n * ANOTHER EXAMPLE WITH FLAT MAP - PAIRS");
 

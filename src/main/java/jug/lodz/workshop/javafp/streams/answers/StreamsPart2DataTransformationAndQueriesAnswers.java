@@ -63,7 +63,7 @@ public class StreamsPart2DataTransformationAndQueriesAnswers implements Printer 
 
         println("\n * FIND DISTINCT ACCOUNTS");
 
-        println("  * only map");
+        println("  * only accountFrom");
 
         readTransactions()
                 .map(t->t.accountFrom)
@@ -71,14 +71,13 @@ public class StreamsPart2DataTransformationAndQueriesAnswers implements Printer 
                 .forEach(this::println);
 
 
-        println("  * all with flat map");
-        // show starnge "cyclic reference" error (remove i->)
+        println("  * concat accountFrom and accountTo");
 
-        readTransactions()
-                .map(t->t.accountFrom)
-                .flatMap(i->readTransactions()
-                        .map(t->t.accountTo)
-                )
+        Stream<Integer> streamFrom = readTransactions().map(t -> t.accountFrom);
+        Stream<Integer> streamTo = readTransactions().map(t -> t.accountTo);
+
+        Stream
+                .concat(streamFrom,streamTo)
                 .distinct()
                 .forEach(this::println);
 

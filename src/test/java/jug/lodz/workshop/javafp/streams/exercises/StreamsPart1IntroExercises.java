@@ -30,7 +30,7 @@ public class StreamsPart1IntroExercises {
     public void simpleMapping_JustAddOneToCreatedStream() throws Exception {
         List<Integer> start = Arrays.asList(1, 2, 3, 4, 5);
 
-        Stream<Integer> result = start.stream(); // add one to each value
+        Stream<Integer> result = start.stream(); // complete this line - add one to each value
 
         assertThat(result.collect(Collectors.toList())).containsExactly(2,3,4,5,6);
     }
@@ -68,7 +68,7 @@ public class StreamsPart1IntroExercises {
 
     //LEVEL 2
     /**
-     *  1) extract price which is String
+     *  1) extract price from Product  - > String
      *  2) convert price to BigDecimal
      *  3) sum all prices
      */
@@ -91,14 +91,14 @@ public class StreamsPart1IntroExercises {
     public void rewriteWithForeach() throws Exception {
         List<String> names=new LinkedList<>();
 
-        products().forEach(null); // write to names
+        products().forEach(null); // write each name to names list
 
         assertThat(names).containsExactly("tv","console","mouse","speakers");
     }
 
 
     /**
-     *  1) map to one
+     *  1) map every element to one
      *  2) reduce by adding all values
      */
     @Test
@@ -115,6 +115,7 @@ public class StreamsPart1IntroExercises {
     // Level 3
 
     /**
+     *  don't change test
      *  complete basicMapReduce method which is listed below
      */
     @Test
@@ -130,11 +131,13 @@ public class StreamsPart1IntroExercises {
     }
 
     //EXERCISE
+    //Use 'map' on Stream and then 'reduce'
     private <A,B> B basicMapReduce(Function<A,B> map, BinaryOperator<B> reduce, B identity, Stream<A> input){
         return null;
     }
 
     /**
+     * don't change test
      *  write map in terms of "forEach" - complete "mapInTermsOfForEach"
      */
     @Test
@@ -145,6 +148,7 @@ public class StreamsPart1IntroExercises {
     }
 
     // EXERCISE
+    // you need to add mapped elements to result collection
     private <A,B> Collection<B>  mapInTermsOfForEach(Stream<A> input,Function<A,B> f){
         Collection<B> result=new LinkedList<>();
 
@@ -154,6 +158,7 @@ public class StreamsPart1IntroExercises {
     }
 
     /**
+     *  don't change test
      *  write map in terms of "reduce" - complete "mapInTermsOfReduce"
      */
     @Test
@@ -164,6 +169,8 @@ public class StreamsPart1IntroExercises {
 
     }
 
+    // EXERCISE
+    // complete two functions which are used in stream reduce operation
     private <A,B> Collection<B>  mapInTermsOfReduce(Stream<A> input,Function<A,B> f){
         List<B> identity=new LinkedList<>();
         BiFunction<List<B>,A,List<B>> accumulate=(l,e)->null;
