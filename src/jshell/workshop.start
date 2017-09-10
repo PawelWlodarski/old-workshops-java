@@ -1,0 +1,54 @@
+1) Start with verbose :
+    -- JShell -v
+
+2) Write System.out.println("hello")
+    a) Write "hello" : $8 ==> "hello"
+    b) *8.toUpperCase
+
+3) Create Custom method
+        void prn(String s){
+            System.out.println(s);
+        }
+    a) /methods
+    b) /list
+    c) /edit 1
+
+4) Declaring Functions
+    a) /help
+    b) /imports : jest java.util.function.*
+    c) create simple function Int=>Int
+        Function<Integer,Integer> f=x->x+1
+        f.apply(1)
+    d) /vars
+    e) IntUnaryOperator f2
+    f) ToIntFunction f12
+    g) f.andThen(f12) not working
+    h) no "andThen" on primitives
+
+
+
+COLLECTIONS
+-SET.of,List.of, Map.of
+
+
+
+STREAMS
+
+* IntStream
+jshell> IntStream.rangeClosed(1,5).boxed().collect(Collectors.toList())
+$16 ==> [1, 2, 3, 4, 5]
+
+*dropWhile, takeWhile
+
+* reduce
+
+* collectors
+
+OPTIONAL
+
+* Stream
+
+DEFUALT METHODS
+* private methods in interfaces
+
+TRY WITH RESOURCES IMPR
