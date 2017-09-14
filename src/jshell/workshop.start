@@ -24,6 +24,41 @@
     f) ToIntFunction f12
     g) f.andThen(f12) not working
     h) no "andThen" on primitives
+5) FunctionalInterfaces
+    a) /set editor gedit -s
+    b) declare Runnable
+         Runnable r = () -> prn("jestem w runie")
+    c)declare Executor
+        ExecutorService ec=Executors.newSingleThreadExecutor()
+    d) submit(r)    , $4.isDone
+    e) /edit prn
+            void prn(String s){
+            	System.out.println(s +" in " + Thread.currentThread().getName());
+            }
+    f) /vars
+    g) Comparator
+        Comparator<String> c = (s1,s2) -> s2.length() - s1.length()
+        List<String> l = Arrays.asList("aa","ccccccc","d")
+        l.sort(c)
+
+6) util.Function
+    a) Predicate
+        Predicate<Integer> moreThan5=i->i>5
+    b) List.of(1,2,3,4,5,6,7,8).stream().filter(moreThan5).collect(Collectors.toList())
+               $24 ==> [6, 7, 8]
+    c) List<Integer> l=List.of(1,2,3,4,5,6,7,8,9)
+    d)Supplier
+         Supplier<Integer> s= () -> 2;
+    e)Class
+        class User{
+
+        	public final String name="Roman";
+
+        	public User(){
+        		System.out.println("in constructor")
+        	}
+        }
+     f)Supplier<User> s = User::new
 
 
 
