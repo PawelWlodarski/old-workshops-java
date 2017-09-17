@@ -25,7 +25,7 @@
     g) f.andThen(f12) not working
     h) no "andThen" on primitives
 5) FunctionalInterfaces
-    a) /set editor gedit -s
+    a) /set editor gedit -s  | /set editor subl -wait  //https://bugs.openjdk.java.net/browse/JDK-8158738
     b) declare Runnable
          Runnable r = () -> prn("jestem w runie")
     c)declare Executor
@@ -59,6 +59,24 @@
         	}
         }
      f)Supplier<User> s = User::new
+     g)Function<String,User> s=User::new;
+            - toString
+     h)Consumer
+        Consumer<String> prnt = s->System.out.println(s)
+        Consumer<String> prnt2 = System.out::println
+        prnt.apply("aaa")
+        prnt.apply("aaa")
+     i)UnaryOperator,BinaryOperator,BiPredicate,BiConsumer,BiFunction
+        UnaryOperator<String> prefix= s-> "aaaaaaaa : "+s
+        BinaryOperator<Integer> sum = (i1,i2)->i1+i2
+        BiFunction<Integer,Integer,Integer> sum2 = (i1,i2) -> i1+i2
+            IntStream.range(1,10).reduce(sum) - WON'T WORK
+        IntStream.range(1,10).boxed().reduce(sum)
+        IntBinaryOperator sumi = (i1,i2) -> i1+i2
+        IntStream.range(1,10).reduce(sumi)
+            $49 ==> OptionalInt[45]
+
+
 
 
 
