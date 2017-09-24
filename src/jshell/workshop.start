@@ -1,9 +1,13 @@
 1) Start with verbose :
     -- JShell -v
+    -- jshell --start PRINTING -- all print methods available!
 
 2) Write System.out.println("hello")
-    a) Write "hello" : $8 ==> "hello"
-    b) *8.toUpperCase
+    *) Write "hello" : $8 ==> "hello"  //no semicolon
+    *) $8.toUpperCase
+    *) /vars
+    *) /v
+    *) 2+ // ask for finishing
 
 3) Create Custom method
         void prn(String s){
@@ -11,10 +15,41 @@
         }
     a) /methods
     b) /list
+    c) /vars
+    d_ /types
+    b2) /help
+            - /help intro
+    b3) /imports
+        jshell> import java.time.*
+    b4) /env
     c) /edit 1
+        c2) tab completion for commands /list <tab>
+        c3) tab completion for commands parameters /list - <tab>
+    d)Forward reference
+        jshell> double volume(int a){
+           ...> return a*PI;
+           ...> }
+        jshell> volume(3)
+        |  attempted to call method volume(int) which cannot be invoked until variable PI is declared
+    e) explain exceptions
+        int divide(int a,int b){
+           ...> return a/b;
+           ...> }
+     f) Press two times for doc
+        f.andThen(
+     g) write while-loop
+         while(i<7){
+           ...> System.out.print(i);
+           ...> i++;
+           ...> }
+3b) History
+    /history
+    /!
+    /-n
+    /id
+
 
 4) Declaring Functions
-    a) /help
     b) /imports : jest java.util.function.*
     c) create simple function Int=>Int
         Function<Integer,Integer> f=x->x+1
@@ -26,6 +61,7 @@
     h) no "andThen" on primitives
 5) FunctionalInterfaces
     a) /set editor gedit -s  | /set editor subl -wait  //https://bugs.openjdk.java.net/browse/JDK-8158738
+        (/set feedback verbose)
     b) declare Runnable
          Runnable r = () -> prn("jestem w runie")
     c)declare Executor
@@ -76,24 +112,53 @@
         IntStream.range(1,10).reduce(sumi)
             $49 ==> OptionalInt[45]
 
+7) Default methods
+    a)DefaultMethods1<String> dm = s->s.length()
+        //explain how it helps with backward compatibility
+    b) private methods in interfaces
+        DefaultMethods2<String> dm = String::length
+        dm.thenAdd(2).multiplyBy(3).app("aaa")
+    c)LambdaSyntax.jsh
+8)Collections and streams
+    a)List,Set
+        List.of(1,2,3,4,5)
+        Set.of(1,2,3,4,5)
+    b)stream()
+        /v $1
+        forEach(prn)
+    c)Map.of
+        Map.of(1,"a",2,"b",3,"c")
+        Try forEach
+        $16.entrySet().stream().forEach(prn)
+    d)Stream Java 9
+        - takeWhile
+        - dropWhile
+    e) peek -
+        debuging
 
+9)Streams and primitives
+    a)IntStream - ranges
+        IntStream.rangeClosed(1,5).boxed().collect(Collectors.toList())
+    b)Stream.of("1","2","3").mapToInt
+    c)array
+        IntStream.toArray
+        Stream.toArray(new Integer[])
 
+10) map i flatMap
+    - flatMap as zipWithIndex, extract specific elements of array row
 
+11)
+    a)Reduce int
+        IntStream.range(1,10).reduce(Integer::sum)  -> optionalInt
+        IntStream.range(1,10).reduce(0,Integer::sum)  -> int
+    b)Reduce object
+        IntStream.range(1,10).mapToObj(Integer::toString).reduce("",String::concat) // String
+        IntStream.range(1,10).mapToObj(Integer::toString).reduce(String::concat) // Optional<String>
 
-COLLECTIONS
--SET.of,List.of, Map.of
+    c)  display and simulate fold left
+        simulate foldLeft -
+    d) findAny, findFirst
 
-
-
-STREAMS
-
-* IntStream
-jshell> IntStream.rangeClosed(1,5).boxed().collect(Collectors.toList())
-$16 ==> [1, 2, 3, 4, 5]
-
-*dropWhile, takeWhile
-
-* reduce
 
 * collectors
 
@@ -101,7 +166,5 @@ OPTIONAL
 
 * Stream
 
-DEFUALT METHODS
-* private methods in interfaces
 
 TRY WITH RESOURCES IMPR
