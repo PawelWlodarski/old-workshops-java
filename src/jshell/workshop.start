@@ -1,6 +1,8 @@
 1) Start with verbose :
     -- JShell -v
     -- jshell --start PRINTING -- all print methods available!
+    --   /help
+    --   /help intro
 
 2) Write System.out.println("hello")
     *) Write "hello" : $8 ==> "hello"  //no semicolon
@@ -8,53 +10,62 @@
     *) /vars
     *) /v
     *) 2+ // ask for finishing
+    *) two times tabulator for docs
 
 3) Create Custom method
         void prn(String s){
             System.out.println(s);
         }
-    a) /methods
-    b) /list
-    c) /vars
-    d_ /types
-    b2) /help
-            - /help intro
-    b3) /imports
-        jshell> import java.time.*
-    b4) /env
+    *) /methods
+    *) /list
+        **) drop 1
+        **) /list f
+    *) /vars
+    *) /types
+    *) /env
+        || show /env --
+
     c) /edit 1
         c2) tab completion for commands /list <tab>
         c3) tab completion for commands parameters /list - <tab>
     d)Forward reference
-        jshell> double volume(int a){
-           ...> return a*PI;
-           ...> }
-        jshell> volume(3)
-        |  attempted to call method volume(int) which cannot be invoked until variable PI is declared
-    e) explain exceptions
+        jshell> void action(Integer i){
+                ...> prn(f.apply(i));
+                ...> }
+                | created method action(Integer), however, it cannot be invoked until variable f is declared
+    e) exceptions
         int divide(int a,int b){
            ...> return a/b;
            ...> }
-     f) Press two times for doc
-        f.andThen(
-     g) write while-loop
+
+     f) write while-loop
          while(i<7){
            ...> System.out.print(i);
            ...> i++;
            ...> }
-3b) History
-    /history
-    /!
-    /-n
-    /id
+     g) imports
+        * import datetime
+        * Shift+Tab +
+        * /imports
+
+
+     h) History
+        /history
+        /!
+        /id
+        /ctrl+r - search
+
+      i) feedback
+        /set feedback
+            * show with 2+2
 
 
 4) Declaring Functions
-    b) /imports : jest java.util.function.*
-    c) create simple function Int=>Int
+    a) /imports : jest java.util.function.*
+    b) create simple function Int=>Int
         Function<Integer,Integer> f=x->x+1
         f.apply(1)
-    d) /vars
+    c) /vars
     e) IntUnaryOperator f2
     f) ToIntFunction f12
     g) f.andThen(f12) not working
@@ -62,6 +73,7 @@
 5) FunctionalInterfaces
     a) /set editor gedit -s  | /set editor subl -wait  //https://bugs.openjdk.java.net/browse/JDK-8158738
         (/set feedback verbose)
+        /set editor   ||default
     b) declare Runnable
          Runnable r = () -> prn("jestem w runie")
     c)declare Executor
@@ -112,13 +124,24 @@
         IntStream.range(1,10).reduce(sumi)
             $49 ==> OptionalInt[45]
 
+6b)
+    * own mode : jshell> /set mode mine normal --command
+    * /set prompt normal - actual settings
+    * /set prompt normal
+    * /set prompt mine "jug>" "jug.....>"
+
+
+
 7) Default methods
+    0) open a script : /open PRINTING
     a)DefaultMethods1<String> dm = s->s.length()
         //explain how it helps with backward compatibility
     b) private methods in interfaces
         DefaultMethods2<String> dm = String::length
         dm.thenAdd(2).multiplyBy(3).app("aaa")
     c)LambdaSyntax.jsh
+    d)DefaultMethods.jsh
+    e)/save file.txt
 8)Collections and streams
     a)List,Set
         List.of(1,2,3,4,5)
@@ -158,13 +181,25 @@
     c)  display and simulate fold left
         simulate foldLeft -
     d) findAny, findFirst
+12)
+    a) stream of nullable
 
-
-* collectors
 
 OPTIONAL
 
-* Stream
 
 
 TRY WITH RESOURCES IMPR
+
+
+/**
+Ctrl+K - Deletes the text from the cursor to the end of the line.
+
+Meta+D - Deletes the text from the cursor to the end of the word.
+
+Ctrl+W - Deletes the text from the cursor to the previous white space.
+
+Ctrl+Y - Pastes the most recently deleted text into the line.
+
+Meta+Y - After Ctrl+Y, Meta+Y cycles through previously deleted text.
+**/
