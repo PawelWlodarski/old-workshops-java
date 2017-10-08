@@ -3,6 +3,7 @@
     -- jshell --start PRINTING -- all print methods available!
     --   /help
     --   /help intro
+    -- "dowcip branzowy JShell"
 
 2) Write System.out.println("hello")
     *) Write "hello" : $8 ==> "hello"  //no semicolon
@@ -66,16 +67,21 @@
         Function<Integer,Integer> f=x->x+1
         f.apply(1)
     c) /vars
+    d) f.andthen(i->i*2)
     e) IntUnaryOperator f2
     f) ToIntFunction f12
     g) f.andThen(f12) not working
     h) no "andThen" on primitives
+    i) IntPredicate + Stream
+
+
 5) FunctionalInterfaces
-    a) /set editor gedit -s  | /set editor subl -wait  //https://bugs.openjdk.java.net/browse/JDK-8158738
-        (/set feedback verbose)
-        /set editor   ||default
+    a)  /set editor
+        |/set editor gedit -s
+        |/set editor subl -wait  //https://bugs.openjdk.java.net/browse/JDK-8158738
+        |/set editor -default
     b) declare Runnable
-         Runnable r = () -> prn("jestem w runie")
+         Runnable r = () -> prn("I'm in run")
     c)declare Executor
         ExecutorService ec=Executors.newSingleThreadExecutor()
     d) submit(r)    , $4.isDone
@@ -89,15 +95,23 @@
         List<String> l = Arrays.asList("aa","ccccccc","d")
         l.sort(c)
 
+
+5b)
+    * own mode : jshell> /set mode mine normal --command
+    * /set prompt normal - actual settings
+    * /set prompt normal
+    * /set prompt mine "jug>" "jug.....>"
+
+
 6) util.Function
     a) Predicate
-        Predicate<Integer> moreThan5=i->i>5
-    b) List.of(1,2,3,4,5,6,7,8).stream().filter(moreThan5).collect(Collectors.toList())
-               $24 ==> [6, 7, 8]
-    c) List<Integer> l=List.of(1,2,3,4,5,6,7,8,9)
-    d)Supplier
-         Supplier<Integer> s= () -> 2;
-    e)Class
+       * Predicate<Integer> moreThan5=i->i>5
+       * List.of(1,2,3,4,5,6,7,8).stream().filter(moreThan5).collect(Collectors.toList())
+          //   $24 ==> [6, 7, 8]
+    b)Supplier
+       * Supplier<Integer> s = () -> 2;
+       * Supplier<Double> d = Math::random
+    c)Class
         class User{
 
         	public final String name="Roman";
@@ -106,14 +120,14 @@
         		System.out.println("in constructor")
         	}
         }
-     f)Supplier<User> s = User::new
-     g)Function<String,User> s=User::new;
+     d)Supplier<User> s = User::new
+     e)Function<String,User> s=User::new;
             - toString
-     h)Consumer
+     f)Consumer
         Consumer<String> prnt = s->System.out.println(s)
         Consumer<String> prnt2 = System.out::println
-        prnt.apply("aaa")
-        prnt.apply("aaa")
+        prnt.accept("aaa")
+        prnt.accept("aaa")
      i)UnaryOperator,BinaryOperator,BiPredicate,BiConsumer,BiFunction
         UnaryOperator<String> prefix= s-> "aaaaaaaa : "+s
         BinaryOperator<Integer> sum = (i1,i2)->i1+i2
@@ -123,74 +137,39 @@
         IntBinaryOperator sumi = (i1,i2) -> i1+i2
         IntStream.range(1,10).reduce(sumi)
             $49 ==> OptionalInt[45]
-
-6b)
-    * own mode : jshell> /set mode mine normal --command
-    * /set prompt normal - actual settings
-    * /set prompt normal
-    * /set prompt mine "jug>" "jug.....>"
-
-
-
-7) Default methods
-    0) open a script : /open PRINTING
-    a)DefaultMethods1<String> dm = s->s.length()
-        //explain how it helps with backward compatibility
-    b) private methods in interfaces
-        DefaultMethods2<String> dm = String::length
-        dm.thenAdd(2).multiplyBy(3).app("aaa")
-    c)LambdaSyntax.jsh
-    d)DefaultMethods.jsh
-    e)/save file.txt
-8)Collections and streams
-    a)List,Set
-        List.of(1,2,3,4,5)
-        Set.of(1,2,3,4,5)
-    b)stream()
-        /v $1
-        forEach(prn)
-    c)Map.of
-        Map.of(1,"a",2,"b",3,"c")
-        Try forEach
-        $16.entrySet().stream().forEach(prn)
-    d)Stream Java 9
-        - takeWhile
-        - dropWhile
-    e) peek -
-        debuging
-
-9)Streams and primitives
-    a)IntStream - ranges
-        IntStream.rangeClosed(1,5).boxed().collect(Collectors.toList())
-    b)Stream.of("1","2","3").mapToInt
-    c)array
-        IntStream.toArray
-        Stream.toArray(new Integer[])
-
-10) map i flatMap
-    - flatMap as zipWithIndex, extract specific elements of array row
-
-11)
-    a)Reduce int
-        IntStream.range(1,10).reduce(Integer::sum)  -> optionalInt
-        IntStream.range(1,10).reduce(0,Integer::sum)  -> int
-    b)Reduce object
-        IntStream.range(1,10).mapToObj(Integer::toString).reduce("",String::concat) // String
-        IntStream.range(1,10).mapToObj(Integer::toString).reduce(String::concat) // Optional<String>
-
-    c)  display and simulate fold left
-        simulate foldLeft -
-    d) findAny, findFirst
-12)
-    a) stream of nullable
+7) Java9
+    * Collections factory
+         * List.of(1,2,3,4,5)
+            * show type
+         * Set.of(1,2,3,4,5)
+            * show exception
+         *  Map.of(1,"a",2,"b",3,"c")
+            *  $16.entrySet().stream().forEach(prn) <- BiConsumer
+    * Stream
+        * takeWhile
+        * dropWhile
+        * iterate
+        * ofNullable
+    * Default methods and private methods in interfaces
+        *  open a script : /open PRINTING <-- explain concept
+        * DefaultMethods.jsh
+        * DefaultMethods1<String> dm = s->s.length()
+            //explain how it helps with backward compatibility
+        * private methods in interfaces
+            DefaultMethods2<String> dm = String::length
+            dm.thenAdd(2).multiplyBy(3).app("aaa")
+        * try-with resources
+    * Optional and Java9
+        * stream
+        * ifPresentOrElse
+        * or (but not in primitive)
+    * /save file.txt
 
 
-OPTIONAL
-
-
-
-TRY WITH RESOURCES IMPR
-
+9)Exercises
+    *) Stream.of("1","2","3").mapToInt
+    *) iterate - fibonacci
+    *) flatMap - zip with index
 
 /**
 Ctrl+K - Deletes the text from the cursor to the end of the line.
