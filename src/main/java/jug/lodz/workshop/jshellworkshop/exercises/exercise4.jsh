@@ -26,8 +26,8 @@ List<User> us=List.of(u1,u2,u3,u4)
 //implement method sortUsers(us) which returns list of alphabetically sorted users
 //remember that comparator is just a two arguments function
 void checkExercise4(){
-    String[] expected=sortUsers(us).stream().map(u->u.name).toArray();
-    prn.accept("sortUsers() : "+Arrays.equals(excpected,
+    String[] expected = sortUsers(us).stream().map(u -> u.name).toArray(String[]::new);
+    prn.accept("sortUsers() : "+Arrays.equals(expected,
     new String[]{ "Agnieszka", "BożeBożeBożenka", "Roman", "Zdzislaw"}
     ));
 }
